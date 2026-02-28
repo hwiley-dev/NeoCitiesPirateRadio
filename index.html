@@ -9,6 +9,37 @@
   </head>
   <body>
     <div class="scanlines" aria-hidden="true"></div>
+    <section class="attract-screen" id="attract-screen" aria-labelledby="attract-title" aria-live="polite">
+      <div class="attract-panel">
+        <p class="attract-tag">BOOT SEQUENCE // BAY LOOP PIRATE BAND</p>
+        <h1 id="attract-title">NeoCities Pirate Radio</h1>
+        <p class="attract-copy" id="attract-copy">
+          Walk the looped city, tune rogue transmitters, and trace quiet relay points across the bay.
+        </p>
+
+        <div class="attract-grid">
+          <div class="attract-block">
+            <h2>Controls</h2>
+            <p>Arrow Keys or WASD to move</p>
+            <p>M toggles audio</p>
+            <p>X stops the current track</p>
+          </div>
+          <div class="attract-block">
+            <h2>New Gear</h2>
+            <p>Tap signals in the terminal to track them</p>
+            <p>Drag on the world screen to steer on mobile</p>
+            <p>Use the radar to hunt the next beacon</p>
+          </div>
+        </div>
+
+        <div class="attract-actions">
+          <button id="enter-world" type="button" disabled>Enter Bay Loop</button>
+          <button id="enter-world-audio" type="button" disabled>Enter + Arm Audio</button>
+        </div>
+
+        <p class="attract-status" id="attract-status">LOADING WORLD...</p>
+      </div>
+    </section>
 
     <header class="site-header">
       <p class="tag" id="world-tag">CYBER BAY LOOP // FRIEND-LOVING RENEGADE DIY TRANSMISSIONS</p>
@@ -17,7 +48,7 @@
         Loop the Bay Area city world with Arrow Keys/WASD or touch controls to unlock channels.
       </p>
       <p class="help" id="world-help">
-        Keyboard: Arrow Keys or WASD to move. Press M to toggle audio. Press X to stop. Cross an edge to loop around the city.
+        Keyboard: Arrow Keys or WASD to move. Touch: hold the D-pad or drag on the map. Press M to toggle audio, X to stop, and tap a signal row to track it.
       </p>
     </header>
 
@@ -27,6 +58,7 @@
           id="game"
           width="640"
           height="448"
+          tabindex="0"
           aria-label="8-bit city world with avatar and unlockable channels"
         ></canvas>
 
@@ -44,19 +76,67 @@
         </div>
 
         <div class="touch-controls" aria-label="Mobile movement controls">
-          <button data-key="arrowup">UP</button>
-          <button data-key="arrowleft">LEFT</button>
-          <button data-key="arrowdown">DOWN</button>
-          <button data-key="arrowright">RIGHT</button>
+          <div class="touch-pad">
+            <span class="touch-spacer" aria-hidden="true"></span>
+            <button data-key="arrowup" type="button">UP</button>
+            <span class="touch-spacer" aria-hidden="true"></span>
+            <button data-key="arrowleft" type="button">LEFT</button>
+            <div class="touch-center" aria-hidden="true">DRAG ON MAP</div>
+            <button data-key="arrowright" type="button">RIGHT</button>
+            <span class="touch-spacer" aria-hidden="true"></span>
+            <button data-key="arrowdown" type="button">DOWN</button>
+            <span class="touch-spacer" aria-hidden="true"></span>
+          </div>
+          <div class="touch-actions">
+            <button id="touch-audio-toggle" type="button">Audio</button>
+            <button id="touch-audio-stop" type="button">Stop</button>
+            <button id="touch-clear-track" type="button">Clear Track</button>
+          </div>
+          <p class="touch-help-copy">Hold the pad or drag anywhere on the world screen to steer.</p>
         </div>
       </section>
 
       <aside class="terminal">
-        <h2>Unlocked Signals</h2>
-        <ul id="channel-list"></ul>
+        <section class="terminal-section signal-dossier">
+          <div class="terminal-heading">
+            <h2>Signal Dossier</h2>
+            <p id="signal-progress">UNLOCKED 0/0</p>
+          </div>
+          <p class="dossier-state" id="dossier-state">ROAMING STATIC</p>
+          <h3 id="dossier-name">Bay Loop City</h3>
+          <p class="dossier-desc" id="dossier-desc">
+            Cruise the city grid to discover pirate broadcasts and quiet community relay points.
+          </p>
+          <p class="dossier-meta" id="dossier-meta-primary">SECTOR: BAY LOOP // COORDS: 00.0, 00.0</p>
+          <p class="dossier-meta" id="dossier-meta-secondary">AUDIO: MUTED // SCAN MODE: WRAP WORLD</p>
+          <p class="dossier-meta" id="dossier-credit">CREDITS: none</p>
+        </section>
 
-        <h2>Transmission Log</h2>
-        <div id="log" aria-live="polite"></div>
+        <section class="terminal-section radar-panel">
+          <div class="terminal-heading">
+            <h2>City Radar</h2>
+            <p class="radar-copy">WHOLE MAP</p>
+          </div>
+          <canvas
+            id="radar"
+            width="224"
+            height="154"
+            aria-label="Mini-map of the pirate radio city world"
+          ></canvas>
+        </section>
+
+        <section class="terminal-section">
+          <div class="terminal-heading">
+            <h2>Unlocked Signals</h2>
+            <p class="radar-copy">TAP TO TRACK</p>
+          </div>
+          <ul id="channel-list"></ul>
+        </section>
+
+        <section class="terminal-section">
+          <h2>Transmission Log</h2>
+          <div id="log" aria-live="polite"></div>
+        </section>
       </aside>
     </main>
 

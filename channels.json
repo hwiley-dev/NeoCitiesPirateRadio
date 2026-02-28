@@ -4,8 +4,8 @@
     {
       "id": "dock",
       "name": "Dockside Solder Net",
-      "tileX": 4,
-      "tileY": 5,
+      "tileX": 28,
+      "tileY": 15,
       "color": "#4dff9f",
       "desc": "Open hardware fixes and boat-borne radio mods.",
       "audio": {
@@ -19,8 +19,8 @@
     {
       "id": "rooftop",
       "name": "Rooftop Dub Relay",
-      "tileX": 6,
-      "tileY": 2,
+      "tileX": 22,
+      "tileY": 18,
       "color": "#f6bd60",
       "desc": "Bass-heavy neighborhood broadcasts and sky-antenna jams.",
       "audio": null
@@ -28,8 +28,8 @@
     {
       "id": "freesoft",
       "name": "Free Software Mast",
-      "tileX": 23,
-      "tileY": 9,
+      "tileX": 42,
+      "tileY": 15,
       "color": "#83c5be",
       "desc": "Tools, scripts, and shared code for independent stations.",
       "audio": null
@@ -37,8 +37,8 @@
     {
       "id": "basement",
       "name": "Basement Tape Loop",
-      "tileX": 6,
-      "tileY": 17,
+      "tileX": 24,
+      "tileY": 28,
       "color": "#ffafcc",
       "desc": "Tape hiss, archival edits, and spoken zines.",
       "audio": null
@@ -46,8 +46,8 @@
     {
       "id": "street",
       "name": "Street Mic Cipher",
-      "tileX": 23,
-      "tileY": 16,
+      "tileX": 46,
+      "tileY": 31,
       "color": "#9bf6ff",
       "desc": "Live stories, spoken word, and direct-action dispatches.",
       "audio": {

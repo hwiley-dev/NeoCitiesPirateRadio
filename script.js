@@ -4,8 +4,8 @@ const DEFAULT_LAYOUT_ID = "bay-loop";
 const DEFAULT_COPY = {
   tag: "CYBER BAY LOOP // FRIEND-LOVING RENEGADE DIY TRANSMISSIONS",
   title: "NeoCities Pirate Radio: Bay Loop City",
-  subtitle: "Walk a neon Bay Area city map to unlock rogue channels and trigger transmissions.",
-  help: "Keyboard: Arrow Keys or WASD to move. Press M to toggle audio. Press X to stop. Cross any edge to loop around the city.",
+  subtitle: "Trace an expanded Bay Area world map with a sharper peninsula, bridges, and east bay contour.",
+  help: "Keyboard: Arrow Keys or WASD to move. Touch: hold the D-pad or drag on the map. Press M to toggle audio, X to stop, and tap a signal row to track it.",
 };
 
 const DEFAULT_PALETTE = {
@@ -13,13 +13,22 @@ const DEFAULT_PALETTE = {
   roadLight: "#0c1530",
   roadInset: "#101c3c",
   roadLine: "#6ff8ff",
+  roadGlow: "#224f79",
+  shoalDark: "#0a3151",
+  shoalLight: "#145882",
+  shoalGlow: "#93f7ff",
   waterDark: "#04162a",
   waterLight: "#0a2748",
   waterGlow: "#37d8ff",
+  coastBright: "#9cf8ff",
+  coastShadow: "rgba(7, 18, 45, 0.88)",
   bridgeBase: "#111738",
   bridgeDeck: "#1a2756",
   bridgeRail: "#ff4fa3",
   bridgeLight: "#ffe56d",
+  hillBase: "#1c2226",
+  hillShade: "#30473c",
+  hillGlow: "#8fcf8d",
   buildingBase: "#1a0f36",
   buildingFace: "#332061",
   buildingWindowA: "#ffe56d",
@@ -43,47 +52,73 @@ const FALLBACK_LAYOUT_RAW = {
   id: "bay-loop",
   name: "Bay Loop City",
   themeHref: "layouts/bay-loop/theme.css",
-  blockedTiles: ["B", "~"],
-  viewport: { width: 20, height: 14 },
-  spawn: { x: 2.5, y: 7.5 },
+  blockedTiles: ["B", "~", "H"],
+  viewport: { width: 24, height: 18 },
+  spawn: { x: 20.5, y: 13.5 },
   copy: DEFAULT_COPY,
   districts: [
-    { name: "Sunset Marina", label: "SF", x1: 0, x2: 9, y1: 0, y2: 8, labelX: 1, labelY: 1, color: "#6ff8ff" },
-    { name: "Mission Neon", label: "MSN", x1: 0, x2: 11, y1: 9, y2: 15, labelX: 1, labelY: 12, color: "#ff82cc" },
-    { name: "Oakland Arcology", label: "OAK", x1: 16, x2: 31, y1: 0, y2: 11, labelX: 19, labelY: 2, color: "#ffe56d" },
-    { name: "Berkeley Patch", label: "BKY", x1: 16, x2: 31, y1: 12, y2: 15, labelX: 19, labelY: 13, color: "#8effb7" },
-    { name: "South Bay Loop", label: "SJ", x1: 8, x2: 31, y1: 16, y2: 21, labelX: 19, labelY: 18, color: "#7cabff" },
+    { name: "North Peninsula", label: "SF", x1: 11, x2: 30, y1: 3, y2: 22, labelX: 16, labelY: 12, color: "#6ff8ff" },
+    { name: "South Peninsula", label: "PEN", x1: 11, x2: 35, y1: 23, y2: 47, labelX: 20, labelY: 33, color: "#ff82cc" },
+    { name: "East Bay North", label: "OAK", x1: 38, x2: 63, y1: 0, y2: 22, labelX: 46, labelY: 14, color: "#ffe56d" },
+    { name: "East Bay South", label: "EBY", x1: 40, x2: 63, y1: 23, y2: 47, labelX: 49, labelY: 33, color: "#8effb7" },
+    { name: "South Bay", label: "SJ", x1: 29, x2: 50, y1: 34, y2: 47, labelX: 35, labelY: 41, color: "#7cabff" },
   ],
   trafficLanes: [
-    { row: 0.5, start: 0, end: 32, speed: 4.2, color: "#ffe56d", count: 8 },
-    { row: 7.5, start: 0, end: 32, speed: -5.1, color: "#7dffbb", count: 8 },
-    { row: 14.5, start: 0, end: 32, speed: 3.7, color: "#35d6ff", count: 8 },
-    { row: 21.5, start: 0, end: 32, speed: -4.0, color: "#ff4fa3", count: 8 },
+    { row: 15.5, start: 13, end: 53, speed: 4.2, color: "#ffe56d", count: 12 },
+    { row: 18.5, start: 12, end: 51, speed: -5.0, color: "#7dffbb", count: 12 },
+    { row: 29.5, start: 15, end: 54, speed: 3.7, color: "#35d6ff", count: 12 },
+    { row: 35.5, start: 18, end: 55, speed: -4.0, color: "#ff4fa3", count: 12 },
   ],
   palette: DEFAULT_PALETTE,
   map: [
-    "........ ........ ........ ........",
-    ".BBB..P. ...~~~~. ...P..BB B.......",
-    ".B.P..P. ...~~~~. ...P..P. B.......",
-    ".B....== =..~~~~. ..===... .B......",
-    ".BBB..== =..~~~~. ..===..B BB......",
-    "...P..== =..~~~~. ..===..P ........",
-    "......== =..~~~~. ..===... ........",
-    "======.= =..~~~~. ..==.=== ========",
-    "......== =..~~~~. ..===... ..P.....",
-    "...P..== =..~~~~. ..===..P ..BBB...",
-    ".BBB..== =..~~~~. ..===... .B.P....",
-    ".B.P..== =..~~~~. ..===..B BB......",
-    ".B....== =..~~~~. ..===... ..P.....",
-    ".BBB..P. ...~~~~. ...P..BB B.......",
-    "........ ..P~~~~P ........ ..P.....",
-    ".BBB..P. ...~~~~. ...P..BB B.......",
-    ".B.P.... ...====. .......P .B......",
-    ".B....P. ........ ..P..... .B......",
-    ".BBB.... ..P..... ..P..... BBB.....",
-    "...P..BB B...P..P ....BBB. .P......",
-    "......B. P....... ........ P.B.....",
-    "........ ........ ........ ........",
+    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~S.........HHHHHH",
+    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~S...........HHHHHH",
+    "~~~~~~~~~~~~~~~~~~~.~~~~~~~~~~~~~~~~~~~~~~~~~S............HHHHHH",
+    "~~~~~~~~~~~~~~~~~~....~~~~~~~~~~~~~~~~~~~~~~S.............HHHHHH",
+    "~~~~~~~~~~~~~~~......S~~~~~~~~~~~~~~~~~~~~~S..............HHHHHH",
+    "~~~~~~~~~~~~~~~.......S~~~~~~~~~~~~~~~~~~~S...............HHHHHH",
+    "~~~~~~~~~~~~~~S........S~~~~~~~~~~~~~~~~~~S...............HHHHHH",
+    "~~~~~~~~~~~~~~S.........S~~~~~~~~~~~~~~~~S................HHHHHH",
+    "~~~~~~~~~~~~~S...........S~~~~~~~~~~~~~~~S................HHHHHH",
+    "~~~~~~~~~~~~~S...........S~~~~~~~~~~~~~~S.................HHHHHH",
+    "~~~~~~~~~~~~S.....BB......S~~~~~~~~~~~~~S.............HHHHHHHHHH",
+    "~~~~~~~~~~~~......BB......S~~~~~~~~~~~~~S.............HHHHHHHHHH",
+    "~~~~~~~~~~~~.........P....SS~~~~~~~~~~~S..............HHHHHHHHHH",
+    "~~~~~~~~~~~................SS~~~~~~~~~~S..............HHHHHHHHHH",
+    "~~~~~~~~~~~............BB...SS~~~~~~~~SS....BB........HHHHHHHHHH",
+    "~~~~~~~~~~~.................SS============P=BB........HHHHHHHHHH",
+    "~~~~~~~~~~~..................S~~~~~~~~~SSBBS..........HHHHHHHHHH",
+    "~~~~~~~~~~~...................S~~~~~~~~SS~SS..........HHHHHHHHHH",
+    "~~~~~~~~~~~...........P.......S~~~~~~~~SS~S...........HHHHHHHHHH",
+    "~~~~~~~~~~~...................S~~~~~~~~SS~SS..........HHHHHHHHHH",
+    "~~~~~~~~~~~...................S~~~~~~~~~S~SS..........HHHHHHHHHH",
+    "~~~~~~~~~~~...................S~~~~~~~~~S~SS..........HHHHHHHHHH",
+    "~~~~~~~~~~~...................S~~~~~~~~~~SSS..........HHHHHHHHHH",
+    "~~~~~~~~~~~....................S~~~~~~~~~S............HHHHHHHHHH",
+    "~~~~~~~~~~~HHHH................S~~~~~~~~~~S...........HHHHHHHHHH",
+    "~~~~~~~~~~~HHHH................S~~~~~~~~~~S...........HHHHHHHHHH",
+    "~~~~~~~~~~~~HHHH...............S~~~~~~~~~~~S..........HHHHHHHHHH",
+    "~~~~~~~~~~~~HHHH..............SS~~~~~~~~~~~S..........HHHHHHHHHH",
+    "~~~~~~~~~~~~HHHH........P.....SS~~~~~~~~~~~~S.........HHHHHHHHHH",
+    "~~~~~~~~~~~~~HHHH.............SS==============........HHHHHHHHHH",
+    "~~~~~~~~~~~~~HHHH.............SS~~~~~~~~~~~~S.........HHHHHHHHHH",
+    "~~~~~~~~~~~~~HHHH.........BB..SS~~~~~~~~~~~~~SP.......HHHHHHHHHH",
+    "~~~~~~~~~~~~~HHHH.........BB..SS~~~~~~~~~~~~~S........HHHHHHHHHH",
+    "~~~~~~~~~~~~~~HHHH.............S~~~~~~~~~~~~~S........HHHHHHHHHH",
+    "~~~~~~~~~~~~~~HHHH...........BBSSSS~~~~~~~~~~SSS..........HHHHHH",
+    "~~~~~~~~~~~~~~~HHHH.............S==============S..........HHHHHH",
+    "~~~~~~~~~~~~~~~HHHH.............SSS~~~~~~~~~~SSS..........HHHHHH",
+    "~~~~~~~~~~~~~~~~HHHH............SSS~~~~~~~~~~SSS..........HHHHHH",
+    "~~~~~~~~~~~~~~~~HHHH........P...SSS~~~~~~~~~~SSSS.........HHHHHH",
+    "~~~~~~~~~~~~~~~~~HHHH...........SSS~~~~~~~~~SSSSS.........HHHHHH",
+    "~~~~~~~~~~~~~~~~~HHHH...........SSS~~~~~~~~~SSSS..........HHHHHH",
+    "~~~~~~~~~~~~~~~~~~HHHH..........SSS~~~~~~~~~SSSSS.........HHHHHH",
+    "~~~~~~~~~~~~~~~~~~HHHH..........SSS~~~~~~~~~SSSSS.........HHHHHH",
+    "~~~~~~~~~~~~~~~~~~~HHHH..........SS~~~~~~~~~SSSSSS........HHHHHH",
+    "~~~~~~~~~~~~~~~~~~~HHHH.........SSS~~~~~~~~~SSSSSS........HHHHHH",
+    "~~~~~~~~~~~~~~~~~~~~HHHH.........SS~~~~~~~~~SSSSSS........HHHHHH",
+    "~~~~~~~~~~~~~~~~~~~~HHHH.........SS~~~~~~~~~SSSSSSS.......HHHHHH",
+    "~~~~~~~~~~~~~~~~~~~~~.............SS~~~~~~~~SSSSSSS.......HHHHHH",
   ],
 };
 
@@ -91,8 +126,8 @@ const FALLBACK_CHANNELS = [
   {
     id: "dock",
     name: "Dockside Solder Net",
-    tileX: 4,
-    tileY: 5,
+    tileX: 28,
+    tileY: 15,
     color: "#4dff9f",
     desc: "Open hardware fixes and boat-borne radio mods.",
     audio: null,
@@ -100,8 +135,8 @@ const FALLBACK_CHANNELS = [
   {
     id: "rooftop",
     name: "Rooftop Dub Relay",
-    tileX: 6,
-    tileY: 2,
+    tileX: 22,
+    tileY: 18,
     color: "#f6bd60",
     desc: "Bass-heavy neighborhood broadcasts and sky-antenna jams.",
     audio: null,
@@ -109,8 +144,8 @@ const FALLBACK_CHANNELS = [
   {
     id: "freesoft",
     name: "Free Software Mast",
-    tileX: 23,
-    tileY: 9,
+    tileX: 42,
+    tileY: 15,
     color: "#83c5be",
     desc: "Tools, scripts, and shared code for independent stations.",
     audio: null,
@@ -118,8 +153,8 @@ const FALLBACK_CHANNELS = [
   {
     id: "basement",
     name: "Basement Tape Loop",
-    tileX: 6,
-    tileY: 17,
+    tileX: 24,
+    tileY: 28,
     color: "#ffafcc",
     desc: "Tape hiss, archival edits, and spoken zines.",
     audio: null,
@@ -127,13 +162,22 @@ const FALLBACK_CHANNELS = [
   {
     id: "street",
     name: "Street Mic Cipher",
-    tileX: 23,
-    tileY: 16,
+    tileX: 46,
+    tileY: 31,
     color: "#9bf6ff",
     desc: "Live stories, spoken word, and direct-action dispatches.",
     audio: null,
   },
 ];
+
+function createDirectionalState() {
+  return {
+    up: false,
+    down: false,
+    left: false,
+    right: false,
+  };
+}
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -144,6 +188,9 @@ const sectorEl = document.getElementById("sector");
 const signalEl = document.getElementById("signal");
 const listEl = document.getElementById("channel-list");
 const logEl = document.getElementById("log");
+const radarCanvas = document.getElementById("radar");
+const radarCtx = radarCanvas.getContext("2d");
+radarCtx.imageSmoothingEnabled = false;
 const audioToggleEl = document.getElementById("audio-toggle");
 const audioStopEl = document.getElementById("audio-stop");
 const nowPlayingEl = document.getElementById("now-playing");
@@ -153,8 +200,23 @@ const worldTitleEl = document.getElementById("world-title");
 const worldSubtagEl = document.getElementById("world-subtag");
 const worldHelpEl = document.getElementById("world-help");
 const layoutThemeEl = document.getElementById("layout-theme");
+const signalProgressEl = document.getElementById("signal-progress");
+const dossierStateEl = document.getElementById("dossier-state");
+const dossierNameEl = document.getElementById("dossier-name");
+const dossierDescEl = document.getElementById("dossier-desc");
+const dossierMetaPrimaryEl = document.getElementById("dossier-meta-primary");
+const dossierMetaSecondaryEl = document.getElementById("dossier-meta-secondary");
+const dossierCreditEl = document.getElementById("dossier-credit");
+const attractEl = document.getElementById("attract-screen");
+const attractCopyEl = document.getElementById("attract-copy");
+const attractStatusEl = document.getElementById("attract-status");
+const enterWorldEl = document.getElementById("enter-world");
+const enterWorldAudioEl = document.getElementById("enter-world-audio");
+const touchAudioToggleEl = document.getElementById("touch-audio-toggle");
+const touchAudioStopEl = document.getElementById("touch-audio-stop");
+const touchClearTrackEl = document.getElementById("touch-clear-track");
 
-const touchButtons = [...document.querySelectorAll(".touch-controls button")];
+const touchButtons = [...document.querySelectorAll(".touch-pad button[data-key]")];
 
 const state = {
   layoutId: resolveRequestedLayoutId(),
@@ -166,15 +228,13 @@ const state = {
   radius: 0.28,
   speed: 3.9,
   unlocked: new Set(),
-  keys: {
-    up: false,
-    down: false,
-    left: false,
-    right: false,
-  },
+  keyboardKeys: createDirectionalState(),
+  touchKeys: createDirectionalState(),
+  dragKeys: createDirectionalState(),
   channels: [],
   channelsById: new Map(),
   activeChannelId: null,
+  trackedChannelId: null,
   tick: 0,
   facing: "right",
   moving: false,
@@ -186,6 +246,13 @@ const state = {
   playToken: 0,
   nowPlaying: "(none)",
   audioStatus: "idle",
+  radarScale: 7,
+  bootReady: false,
+  worldStarted: false,
+  loopStarted: false,
+  dragPointerId: null,
+  dragOriginX: 0,
+  dragOriginY: 0,
 };
 
 function resolveRequestedLayoutId() {
@@ -220,19 +287,89 @@ function shortestWrappedDelta(a, b, size) {
   return delta;
 }
 
-function setKey(key, isDown) {
-  if (key === "arrowup" || key === "w") state.keys.up = isDown;
-  if (key === "arrowdown" || key === "s") state.keys.down = isDown;
-  if (key === "arrowleft" || key === "a") state.keys.left = isDown;
-  if (key === "arrowright" || key === "d") state.keys.right = isDown;
+function setDirectionalKey(target, key, isDown) {
+  if (key === "arrowup" || key === "w") target.up = isDown;
+  if (key === "arrowdown" || key === "s") target.down = isDown;
+  if (key === "arrowleft" || key === "a") target.left = isDown;
+  if (key === "arrowright" || key === "d") target.right = isDown;
+}
+
+function resetDirectionalState(target) {
+  target.up = false;
+  target.down = false;
+  target.left = false;
+  target.right = false;
+}
+
+function startWorld({ armAudio = false } = {}) {
+  if (!state.bootReady || state.worldStarted) {
+    return;
+  }
+
+  state.worldStarted = true;
+  document.body.classList.add("world-started");
+  attractEl.setAttribute("aria-hidden", "true");
+  pushLog(armAudio ? "Operator entered Bay Loop with audio armed." : "Operator entered Bay Loop.");
+
+  if (armAudio) {
+    enableAudio(true);
+  }
+
+  canvas.focus();
+  if (!state.loopStarted) {
+    state.loopStarted = true;
+    lastTs = performance.now();
+    requestAnimationFrame(loop);
+  }
+}
+
+function setAttractStatus(message, isReady = false) {
+  attractStatusEl.textContent = message;
+  enterWorldEl.disabled = !isReady;
+  enterWorldAudioEl.disabled = !isReady;
+}
+
+function applyDragVector(dx, dy) {
+  const threshold = 18;
+  resetDirectionalState(state.dragKeys);
+
+  if (dx <= -threshold) state.dragKeys.left = true;
+  if (dx >= threshold) state.dragKeys.right = true;
+  if (dy <= -threshold) state.dragKeys.up = true;
+  if (dy >= threshold) state.dragKeys.down = true;
+}
+
+function stopDragSteering(pointerId) {
+  if (state.dragPointerId !== pointerId) {
+    return;
+  }
+
+  resetDirectionalState(state.dragKeys);
+  state.dragPointerId = null;
+  canvas.classList.remove("touch-dragging");
+  if (canvas.hasPointerCapture(pointerId)) {
+    canvas.releasePointerCapture(pointerId);
+  }
 }
 
 window.addEventListener("keydown", (event) => {
   const key = event.key.toLowerCase();
 
+  if (!state.worldStarted) {
+    if ((key === "enter" || key === " ") && state.bootReady) {
+      event.preventDefault();
+      startWorld();
+    }
+    if (key === "m" && state.bootReady) {
+      event.preventDefault();
+      startWorld({ armAudio: true });
+    }
+    return;
+  }
+
   if (["arrowup", "arrowdown", "arrowleft", "arrowright", "w", "a", "s", "d"].includes(key)) {
     event.preventDefault();
-    setKey(key, true);
+    setDirectionalKey(state.keyboardKeys, key, true);
     return;
   }
 
@@ -254,26 +391,63 @@ window.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener("keyup", (event) => {
-  setKey(event.key.toLowerCase(), false);
+  if (!state.worldStarted) {
+    return;
+  }
+
+  setDirectionalKey(state.keyboardKeys, event.key.toLowerCase(), false);
 });
 
 touchButtons.forEach((button) => {
   const key = button.dataset.key;
 
-  const press = () => {
+  const press = (event) => {
+    event.preventDefault();
     button.classList.add("active");
-    setKey(key, true);
+    setDirectionalKey(state.touchKeys, key, true);
   };
 
-  const release = () => {
+  const release = (event) => {
+    event.preventDefault();
     button.classList.remove("active");
-    setKey(key, false);
+    setDirectionalKey(state.touchKeys, key, false);
   };
 
   button.addEventListener("pointerdown", press);
   button.addEventListener("pointerup", release);
   button.addEventListener("pointercancel", release);
   button.addEventListener("pointerleave", release);
+});
+
+canvas.addEventListener("pointerdown", (event) => {
+  if (!state.worldStarted || event.pointerType === "mouse") {
+    return;
+  }
+
+  event.preventDefault();
+  state.dragPointerId = event.pointerId;
+  state.dragOriginX = event.clientX;
+  state.dragOriginY = event.clientY;
+  resetDirectionalState(state.dragKeys);
+  canvas.classList.add("touch-dragging");
+  canvas.setPointerCapture(event.pointerId);
+});
+
+canvas.addEventListener("pointermove", (event) => {
+  if (state.dragPointerId !== event.pointerId) {
+    return;
+  }
+
+  event.preventDefault();
+  applyDragVector(event.clientX - state.dragOriginX, event.clientY - state.dragOriginY);
+});
+
+canvas.addEventListener("pointerup", (event) => {
+  stopDragSteering(event.pointerId);
+});
+
+canvas.addEventListener("pointercancel", (event) => {
+  stopDragSteering(event.pointerId);
 });
 
 function pushLog(message) {
@@ -299,19 +473,47 @@ function getNowPlaying() {
   return state.nowPlaying;
 }
 
+function formatDuration(totalSeconds) {
+  if (!Number.isInteger(totalSeconds) || totalSeconds <= 0) return "unknown length";
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes}:${String(seconds).padStart(2, "0")}`;
+}
+
+function channelStatus(channel) {
+  const isUnlocked = state.unlocked.has(channel.id);
+  if (!isUnlocked) return "LOCKED";
+  return channel.audio ? "LIVE" : "QUIET";
+}
+
+function getTrackedChannel() {
+  if (!state.trackedChannelId) return null;
+  return getChannelById(state.trackedChannelId);
+}
+
 function renderAudioControls() {
   const locked = Boolean(state.audioLockedReason);
   audioToggleEl.disabled = locked;
   audioStopEl.disabled = !state.currentAudio;
+  touchAudioToggleEl.disabled = locked;
+  touchAudioStopEl.disabled = !state.currentAudio;
 
   if (locked) {
     audioToggleEl.classList.remove("active");
+    touchAudioToggleEl.classList.remove("active");
     audioToggleEl.textContent = "Audio Unavailable";
+    touchAudioToggleEl.textContent = "Unavailable";
     return;
   }
 
   audioToggleEl.classList.toggle("active", state.audioEnabled);
+  touchAudioToggleEl.classList.toggle("active", state.audioEnabled);
   audioToggleEl.textContent = state.audioEnabled ? "Disable Audio" : "Enable Audio";
+  touchAudioToggleEl.textContent = state.audioEnabled ? "Audio On" : "Audio Off";
+}
+
+function renderTrackingControls() {
+  touchClearTrackEl.disabled = !state.trackedChannelId;
 }
 
 function cancelPendingAudio() {
@@ -529,14 +731,14 @@ function normalizeLayout(raw) {
       errors.push(`map[${index}] length does not match row 0`);
     }
 
-    if (!/^[.=~BP]+$/.test(row)) {
+    if (!/^[.=~BPSH]+$/.test(row)) {
       errors.push(`map[${index}] contains unsupported tile characters`);
     }
   });
 
   const blockedTiles = Array.isArray(raw.blockedTiles) && raw.blockedTiles.length > 0
     ? raw.blockedTiles.filter((tile) => typeof tile === "string" && tile.length === 1)
-    : ["B", "~"];
+    : ["B", "~", "H"];
 
   if (!isPlainObject(raw.viewport) || !Number.isInteger(raw.viewport.width) || !Number.isInteger(raw.viewport.height)) {
     errors.push("Layout viewport must include integer width and height");
@@ -641,10 +843,21 @@ function applyLayoutChrome(layout) {
   document.title = layout.copy.title;
 }
 
+function syncRadarCanvas(layout) {
+  const maxScale = 8;
+  const minScale = 2;
+  const widthScale = Math.floor(224 / layout.mapWidth);
+  const heightScale = Math.floor(154 / layout.mapHeight);
+  state.radarScale = Math.max(minScale, Math.min(maxScale, widthScale, heightScale));
+  radarCanvas.width = layout.mapWidth * state.radarScale;
+  radarCanvas.height = layout.mapHeight * state.radarScale;
+}
+
 function setLayout(layout) {
   state.layout = layout;
   state.unlocked.clear();
   state.activeChannelId = null;
+  state.trackedChannelId = null;
   state.x = wrapCoord(layout.spawn.x, layout.mapWidth);
   state.y = wrapCoord(layout.spawn.y, layout.mapHeight);
   state.cameraX = state.x;
@@ -654,6 +867,7 @@ function setLayout(layout) {
   canvas.height = layout.viewport.height * TILE_SIZE;
 
   applyLayoutChrome(layout);
+  syncRadarCanvas(layout);
 }
 
 async function initLayout() {
@@ -817,8 +1031,10 @@ function setChannels(channels) {
   state.channelsById = new Map(channels.map((channel) => [channel.id, channel]));
   state.unlocked.clear();
   state.activeChannelId = null;
+  state.trackedChannelId = null;
   clearAudioRuntimes();
   renderChannels();
+  renderTrackingControls();
 }
 
 async function initChannels() {
@@ -1066,6 +1282,112 @@ function unlock(channel) {
   renderChannels();
 }
 
+function describeDirection(dx, dy) {
+  const threshold = 0.35;
+  const vertical = dy <= -threshold ? "N" : dy >= threshold ? "S" : "";
+  const horizontal = dx <= -threshold ? "W" : dx >= threshold ? "E" : "";
+  return vertical || horizontal ? `${vertical}${horizontal}` : "HERE";
+}
+
+function trackingMetrics(channel) {
+  const layout = currentLayout();
+  const targetX = channel.tileX + 0.5;
+  const targetY = channel.tileY + 0.5;
+  const dx = shortestWrappedDelta(targetX, state.x, layout.mapWidth);
+  const dy = shortestWrappedDelta(targetY, state.y, layout.mapHeight);
+
+  return {
+    distance: Math.hypot(dx, dy),
+    direction: describeDirection(dx, dy),
+    sector: findDistrictName(targetX, targetY).toUpperCase(),
+  };
+}
+
+function trackingStatusLabel(channel, isActiveFocus) {
+  const status = channelStatus(channel);
+  if (isActiveFocus) {
+    return status === "LIVE" ? "TUNED LIVE" : status === "QUIET" ? "TUNED QUIET" : status;
+  }
+  return `TRACKING ${status}`;
+}
+
+function setTrackedChannel(channelId) {
+  const nextChannelId = channelId && state.channelsById.has(channelId) ? channelId : null;
+
+  if (state.trackedChannelId === nextChannelId) {
+    if (!nextChannelId) {
+      return;
+    }
+
+    state.trackedChannelId = null;
+    pushLog("Tracking cleared. Free scan restored.");
+  } else {
+    state.trackedChannelId = nextChannelId;
+    if (nextChannelId) {
+      const tracked = getTrackedChannel();
+      pushLog(`Tracking ${tracked.name}. Follow the radar pulse.`);
+    }
+  }
+
+  renderChannels();
+  renderTrackingControls();
+  updateReadout(getChannelById(state.activeChannelId));
+  draw();
+}
+
+function updateSignalDossier(activeChannel) {
+  const layout = currentLayout();
+  const sector = findDistrictName(state.x, state.y).toUpperCase();
+  const coords = `${wrapCoord(state.x, layout.mapWidth).toFixed(1)}, ${wrapCoord(state.y, layout.mapHeight).toFixed(1)}`;
+  const unlockedCount = state.unlocked.size;
+  const trackedChannel = getTrackedChannel();
+  const focusChannel = activeChannel || trackedChannel;
+  const isActiveFocus = Boolean(activeChannel);
+  const audioLine = state.audioLockedReason
+    ? `AUDIO: UNAVAILABLE (${state.audioLockedReason.toUpperCase()})`
+    : `AUDIO: ${state.audioEnabled ? state.audioStatus.toUpperCase() : "MUTED"}`;
+
+  signalProgressEl.textContent = `UNLOCKED ${unlockedCount}/${state.channels.length}`;
+  dossierMetaPrimaryEl.textContent = `SECTOR: ${sector} // COORDS: ${coords}`;
+
+  if (!focusChannel) {
+    dossierStateEl.textContent = "ROAMING STATIC";
+    dossierNameEl.textContent = layout.name;
+    dossierDescEl.textContent = layout.copy.subtitle;
+    dossierMetaSecondaryEl.textContent = `${audioLine} // SCAN MODE: WRAP WORLD`;
+    dossierCreditEl.textContent = "CREDITS: Move onto a signal marker to reveal station details.";
+    return;
+  }
+
+  const isUnlocked = state.unlocked.has(focusChannel.id);
+  const metrics = trackingMetrics(focusChannel);
+
+  dossierStateEl.textContent = trackingStatusLabel(focusChannel, isActiveFocus);
+  dossierNameEl.textContent = focusChannel.name;
+
+  if (!isActiveFocus && !isUnlocked) {
+    dossierDescEl.textContent = "Encrypted signal pinned on radar. Reach the marker on foot to decode its notes and credits.";
+    dossierMetaSecondaryEl.textContent = `TRACK: ${metrics.distance.toFixed(1)} TILES ${metrics.direction} // TARGET SECTOR: ${metrics.sector}`;
+    dossierCreditEl.textContent = "CREDITS: Hidden until unlocked.";
+    return;
+  }
+
+  dossierDescEl.textContent = focusChannel.desc;
+
+  if (!focusChannel.audio) {
+    dossierMetaSecondaryEl.textContent = isActiveFocus
+      ? `${audioLine} // SIGNAL TYPE: QUIET ZONE`
+      : `TRACK: ${metrics.distance.toFixed(1)} TILES ${metrics.direction} // TARGET: QUIET ZONE`;
+    dossierCreditEl.textContent = "CREDITS: Off-air community relay point.";
+    return;
+  }
+
+  dossierMetaSecondaryEl.textContent = isActiveFocus
+    ? `${audioLine} // LENGTH: ${formatDuration(focusChannel.audio.durationSec)}`
+    : `TRACK: ${metrics.distance.toFixed(1)} TILES ${metrics.direction} // LENGTH: ${formatDuration(focusChannel.audio.durationSec)}`;
+  dossierCreditEl.textContent = `CREDITS: ${focusChannel.audio.attribution} // ${focusChannel.audio.license}`;
+}
+
 function renderChannels() {
   listEl.innerHTML = "";
 
@@ -1073,18 +1395,29 @@ function renderChannels() {
     const li = document.createElement("li");
     const isUnlocked = state.unlocked.has(channel.id);
     const isActive = state.activeChannelId === channel.id;
-    const isSilent = !channel.audio;
+    const isTracked = state.trackedChannelId === channel.id;
+    const statusLabel = channelStatus(channel);
+    const itemState = !isUnlocked ? "locked" : channel.audio ? "live" : "quiet";
 
-    li.className = `${isSilent ? "quiet" : isUnlocked ? "live" : "locked"}${isActive ? " active" : ""}`;
+    li.className = `${itemState}${isActive ? " active" : ""}${isTracked ? " tracked" : ""}`;
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "channel-button";
+    button.dataset.channelId = channel.id;
+    button.setAttribute("aria-pressed", String(isTracked));
+    button.title = isTracked ? "Clear tracked signal" : `Track ${channel.name}`;
 
     const name = document.createElement("span");
+    name.className = "name";
     name.textContent = channel.name;
 
     const status = document.createElement("span");
     status.className = "status";
-    status.textContent = isSilent ? "QUIET" : isUnlocked ? "LIVE" : "LOCKED";
+    status.textContent = statusLabel;
 
-    li.append(name, status);
+    button.append(name, status);
+    li.appendChild(button);
     listEl.appendChild(li);
   });
 }
@@ -1112,8 +1445,14 @@ function updateReadout(channel) {
   const layout = currentLayout();
   coordsEl.textContent = `POS ${wrapCoord(state.x, layout.mapWidth).toFixed(1)}, ${wrapCoord(state.y, layout.mapHeight).toFixed(1)}`;
   sectorEl.textContent = `SECTOR: ${findDistrictName(state.x, state.y).toUpperCase()}`;
+  updateSignalDossier(channel);
+  const trackedChannel = getTrackedChannel();
 
   if (!channel) {
+    if (trackedChannel) {
+      signalEl.textContent = `SIGNAL: TRACKING ${trackedChannel.name.toUpperCase()}`;
+      return;
+    }
     signalEl.textContent = `SIGNAL: ${layout.name.toUpperCase()} STATIC`;
     return;
   }
@@ -1130,10 +1469,10 @@ function updatePlayer(dt) {
   let dx = 0;
   let dy = 0;
 
-  if (state.keys.left) dx -= 1;
-  if (state.keys.right) dx += 1;
-  if (state.keys.up) dy -= 1;
-  if (state.keys.down) dy += 1;
+  if (state.keyboardKeys.left || state.touchKeys.left || state.dragKeys.left) dx -= 1;
+  if (state.keyboardKeys.right || state.touchKeys.right || state.dragKeys.right) dx += 1;
+  if (state.keyboardKeys.up || state.touchKeys.up || state.dragKeys.up) dy -= 1;
+  if (state.keyboardKeys.down || state.touchKeys.down || state.dragKeys.down) dy += 1;
 
   state.moving = dx !== 0 || dy !== 0;
 
@@ -1189,9 +1528,31 @@ function drawRoadTile(px, py, x, y) {
   ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
   ctx.fillStyle = paletteValue("roadInset");
   ctx.fillRect(px + 2, py + 2, TILE_SIZE - 4, TILE_SIZE - 4);
-  const dash = Math.floor((state.tick * 8 + x * 3 + y * 2) % 16);
+  const pulse = Math.floor((state.tick * 8 + x * 5 + y * 3) % 14);
+  ctx.fillStyle = paletteValue("roadGlow");
+  if ((x + y) % 2) {
+    ctx.fillRect(px + 6, py + 8, TILE_SIZE - 12, 2);
+    ctx.fillRect(px + 10, py + 18, TILE_SIZE - 20, 2);
+    ctx.fillRect(px + 7 + pulse, py + 8, 4, 2);
+  } else {
+    ctx.fillRect(px + 8, py + 6, 2, TILE_SIZE - 12);
+    ctx.fillRect(px + 18, py + 10, 2, TILE_SIZE - 20);
+    ctx.fillRect(px + 8, py + 7 + pulse, 2, 4);
+  }
   ctx.fillStyle = paletteValue("roadLine");
-  ctx.fillRect(px + dash, py + 15, 6, 2);
+  ctx.fillRect(px + 22, py + 8, 3, 3);
+  ctx.fillRect(px + 10, py + 21, 3, 3);
+}
+
+function drawShallowTile(px, py, x, y) {
+  ctx.fillStyle = (x + y) % 2 ? paletteValue("shoalDark") : paletteValue("shoalLight");
+  ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
+  ctx.fillStyle = paletteValue("waterGlow");
+  ctx.fillRect(px + 2, py + 4, TILE_SIZE - 4, 2);
+  ctx.fillRect(px + 5, py + 14, TILE_SIZE - 10, 2);
+  ctx.fillStyle = paletteValue("shoalGlow");
+  ctx.fillRect(px + 6, py + 8, 4, 4);
+  ctx.fillRect(px + 18, py + 19, 6, 2);
 }
 
 function drawWaterTile(px, py, x, y) {
@@ -1216,6 +1577,47 @@ function drawBridgeTile(px, py, x, y) {
   const light = Math.floor((state.tick * 10 + x * 4 + y * 2) % TILE_SIZE);
   ctx.fillStyle = paletteValue("bridgeLight");
   ctx.fillRect(px + light, py + 14, 5, 3);
+}
+
+function drawHillTile(px, py, x, y) {
+  ctx.fillStyle = paletteValue("hillBase");
+  ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
+  ctx.fillStyle = paletteValue("hillShade");
+  ctx.fillRect(px + 2, py + 8, TILE_SIZE - 4, TILE_SIZE - 10);
+  ctx.fillRect(px + 6, py + 3, TILE_SIZE - 12, 8);
+  ctx.fillStyle = paletteValue("hillGlow");
+  ctx.fillRect(px + 7, py + 6, 10, 2);
+  ctx.fillRect(px + 14, py + 15, 7, 2);
+  ctx.fillRect(px + 10, py + 22, 9, 2);
+}
+
+function drawCoastOutline(px, py, x, y, tile) {
+  const layout = currentLayout();
+  const north = mapTile(x, y - 1, layout) === "~";
+  const south = mapTile(x, y + 1, layout) === "~";
+  const west = mapTile(x - 1, y, layout) === "~";
+  const east = mapTile(x + 1, y, layout) === "~";
+
+  if (!north && !south && !west && !east) {
+    return;
+  }
+
+  ctx.fillStyle = paletteValue("coastShadow");
+  if (north) ctx.fillRect(px, py, TILE_SIZE, 4);
+  if (south) ctx.fillRect(px, py + TILE_SIZE - 4, TILE_SIZE, 4);
+  if (west) ctx.fillRect(px, py, 4, TILE_SIZE);
+  if (east) ctx.fillRect(px + TILE_SIZE - 4, py, 4, TILE_SIZE);
+
+  ctx.fillStyle = tile === "S" ? paletteValue("shoalGlow") : paletteValue("coastBright");
+  if (north) ctx.fillRect(px + 1, py + 1, TILE_SIZE - 2, 2);
+  if (south) ctx.fillRect(px + 1, py + TILE_SIZE - 3, TILE_SIZE - 2, 2);
+  if (west) ctx.fillRect(px + 1, py + 1, 2, TILE_SIZE - 2);
+  if (east) ctx.fillRect(px + TILE_SIZE - 3, py + 1, 2, TILE_SIZE - 2);
+
+  if (north && west) ctx.fillRect(px + 1, py + 1, 4, 4);
+  if (north && east) ctx.fillRect(px + TILE_SIZE - 5, py + 1, 4, 4);
+  if (south && west) ctx.fillRect(px + 1, py + TILE_SIZE - 5, 4, 4);
+  if (south && east) ctx.fillRect(px + TILE_SIZE - 5, py + TILE_SIZE - 5, 4, 4);
 }
 
 function drawBuildingTile(px, py, x, y) {
@@ -1259,14 +1661,22 @@ function drawMap() {
 
       if (tile === "~") {
         drawWaterTile(px, py, wrappedX, wrappedY);
+      } else if (tile === "S") {
+        drawShallowTile(px, py, wrappedX, wrappedY);
       } else if (tile === "B") {
         drawBuildingTile(px, py, wrappedX, wrappedY);
+      } else if (tile === "H") {
+        drawHillTile(px, py, wrappedX, wrappedY);
       } else if (tile === "=") {
         drawBridgeTile(px, py, wrappedX, wrappedY);
       } else if (tile === "P") {
         drawPlazaTile(px, py, wrappedX, wrappedY);
       } else {
         drawRoadTile(px, py, wrappedX, wrappedY);
+      }
+
+      if (tile !== "~" && tile !== "=") {
+        drawCoastOutline(px, py, wrappedX, wrappedY, tile);
       }
     }
   }
@@ -1323,6 +1733,7 @@ function drawChannelMarkers() {
   state.channels.forEach((channel) => {
     const isUnlocked = state.unlocked.has(channel.id);
     const isActive = state.activeChannelId === channel.id;
+    const isTracked = state.trackedChannelId === channel.id;
     const screen = worldToScreen(channel.tileX, channel.tileY);
     const px = Math.round(screen.x);
     const py = Math.round(screen.y);
@@ -1334,9 +1745,15 @@ function drawChannelMarkers() {
     ctx.fillStyle = isUnlocked ? `${channel.color}66` : "rgba(130, 140, 176, 0.35)";
     ctx.fillRect(px + 8, py + 8, TILE_SIZE - 16, TILE_SIZE - 16);
 
-    ctx.strokeStyle = isActive ? channel.color : "rgba(255, 255, 255, 0.45)";
-    ctx.lineWidth = isActive ? 3 : 2;
+    ctx.strokeStyle = isActive ? channel.color : isTracked ? "#ffe56d" : "rgba(255, 255, 255, 0.45)";
+    ctx.lineWidth = isActive ? 3 : isTracked ? 2.5 : 2;
     ctx.strokeRect(px + 6 - pulse / 2, py + 6 - pulse / 2, TILE_SIZE - 12 + pulse, TILE_SIZE - 12 + pulse);
+
+    if (isTracked && !isActive) {
+      ctx.strokeStyle = "rgba(255, 79, 163, 0.75)";
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(px + 3 - pulse, py + 3 - pulse, TILE_SIZE - 6 + pulse * 2, TILE_SIZE - 6 + pulse * 2);
+    }
 
     ctx.fillStyle = channel.color;
     ctx.fillRect(px + 14, py + 4, 4, 6);
@@ -1379,6 +1796,70 @@ function drawWrapHint() {
   ctx.fillRect(canvas.width - 4, 0, 4, canvas.height);
 }
 
+function radarTileColor(tile, x, y) {
+  if (tile === "~") return (x + y) % 2 ? paletteValue("waterLight") : paletteValue("waterDark");
+  if (tile === "S") return (x + y) % 2 ? paletteValue("shoalLight") : paletteValue("shoalDark");
+  if (tile === "H") return (x + y) % 2 ? paletteValue("hillShade") : paletteValue("hillBase");
+  if (tile === "B") return paletteValue("buildingFace");
+  if (tile === "=") return paletteValue("bridgeDeck");
+  if (tile === "P") return paletteValue("plazaGlow");
+  return (x + y) % 2 ? paletteValue("roadLight") : paletteValue("roadDark");
+}
+
+function drawRadar() {
+  const layout = currentLayout();
+  const scale = state.radarScale;
+
+  radarCtx.clearRect(0, 0, radarCanvas.width, radarCanvas.height);
+
+  for (let y = 0; y < layout.mapHeight; y += 1) {
+    for (let x = 0; x < layout.mapWidth; x += 1) {
+      radarCtx.fillStyle = radarTileColor(layout.map[y][x], x, y);
+      radarCtx.fillRect(x * scale, y * scale, scale, scale);
+    }
+  }
+
+  radarCtx.strokeStyle = "rgba(255, 255, 255, 0.16)";
+  radarCtx.lineWidth = 1;
+  radarCtx.strokeRect(0.5, 0.5, radarCanvas.width - 1, radarCanvas.height - 1);
+
+  state.channels.forEach((channel) => {
+    const isUnlocked = state.unlocked.has(channel.id);
+    const isActive = state.activeChannelId === channel.id;
+    const isTracked = state.trackedChannelId === channel.id;
+    const pad = Math.max(1, Math.floor(scale / 3));
+    const size = Math.max(2, scale - pad * 2);
+    const px = channel.tileX * scale + pad;
+    const py = channel.tileY * scale + pad;
+
+    radarCtx.fillStyle = isUnlocked ? channel.color : "rgba(122, 137, 180, 0.88)";
+    radarCtx.fillRect(px, py, size, size);
+
+    if (isTracked) {
+      radarCtx.strokeStyle = "#ff4fa3";
+      radarCtx.lineWidth = 1;
+      radarCtx.strokeRect(channel.tileX * scale + 1.5, channel.tileY * scale + 1.5, Math.max(1, scale - 3), Math.max(1, scale - 3));
+    }
+
+    if (isActive) {
+      radarCtx.strokeStyle = "#fff4a6";
+      radarCtx.lineWidth = 1;
+      radarCtx.strokeRect(channel.tileX * scale + 0.5, channel.tileY * scale + 0.5, scale - 1, scale - 1);
+    }
+  });
+
+  const playerX = wrapCoord(state.x, layout.mapWidth) * scale;
+  const playerY = wrapCoord(state.y, layout.mapHeight) * scale;
+  const playerSize = Math.max(3, Math.floor(scale / 2));
+  const playerOffset = Math.floor((scale - playerSize) / 2);
+
+  radarCtx.fillStyle = "#ffffff";
+  radarCtx.fillRect(Math.round(playerX + playerOffset), Math.round(playerY + playerOffset), playerSize, playerSize);
+  radarCtx.strokeStyle = "#ff4fa3";
+  radarCtx.lineWidth = 1;
+  radarCtx.strokeRect(Math.round(playerX + playerOffset) - 0.5, Math.round(playerY + playerOffset) - 0.5, playerSize + 1, playerSize + 1);
+}
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawMap();
@@ -1387,6 +1868,7 @@ function draw() {
   drawChannelMarkers();
   drawPlayer();
   drawWrapHint();
+  drawRadar();
 }
 
 let lastTs = 0;
@@ -1418,6 +1900,10 @@ audioToggleEl.addEventListener("click", () => {
   enableAudio(!state.audioEnabled);
 });
 
+touchAudioToggleEl.addEventListener("click", () => {
+  enableAudio(!state.audioEnabled);
+});
+
 audioStopEl.addEventListener("click", () => {
   cancelPendingAudio();
   stopCurrentAudio();
@@ -1425,6 +1911,37 @@ audioStopEl.addEventListener("click", () => {
     setNowPlaying("(stopped)");
     setAudioStatus("armed");
   }
+});
+
+touchAudioStopEl.addEventListener("click", () => {
+  cancelPendingAudio();
+  stopCurrentAudio();
+  if (state.audioEnabled && !state.audioLockedReason) {
+    setNowPlaying("(stopped)");
+    setAudioStatus("armed");
+  }
+});
+
+touchClearTrackEl.addEventListener("click", () => {
+  setTrackedChannel(state.trackedChannelId);
+});
+
+listEl.addEventListener("click", (event) => {
+  const target = event.target instanceof Element ? event.target : null;
+  const button = target ? target.closest(".channel-button") : null;
+  if (!button) {
+    return;
+  }
+
+  setTrackedChannel(button.dataset.channelId);
+});
+
+enterWorldEl.addEventListener("click", () => {
+  startWorld();
+});
+
+enterWorldAudioEl.addEventListener("click", () => {
+  startWorld({ armAudio: true });
 });
 
 window.loadLayoutManifest = loadLayoutManifest;
@@ -1437,6 +1954,8 @@ async function init() {
   setNowPlaying("(muted)");
   setAudioStatus("loading world");
   renderAudioControls();
+  renderTrackingControls();
+  setAttractStatus("LOADING WORLD...");
 
   if (window.location.protocol === "file:") {
     pushLog("Local tip: serve this folder over HTTP so layout and channel manifests can load.");
@@ -1460,11 +1979,15 @@ async function init() {
   renderAudioControls();
   updateReadout(null);
   draw();
-  requestAnimationFrame(loop);
+  state.bootReady = true;
+  attractCopyEl.textContent = "World boot complete. Enter the city, tap a signal to track it, and drag on the map to steer on mobile.";
+  setAttractStatus("READY TO TRANSMIT // PRESS ENTER OR TAP A BUTTON", true);
 }
 
 init().catch((error) => {
   const reason = error instanceof Error ? error.message : String(error);
   pushLog(`Fatal startup error: ${reason}`);
   setAudioStatus("fatal error");
+  attractCopyEl.textContent = "Boot failed before city entry. Reload after fixing the site files.";
+  setAttractStatus("BOOT ERROR", false);
 });

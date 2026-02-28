@@ -37,6 +37,24 @@ Keyboard controls:
 3. `X` stops the current track
 4. Crossing any edge wraps you to the opposite side of the map
 
+Interaction updates:
+1. A title/attract screen now gates entry and can arm audio on start
+2. Clicking or tapping any signal row tracks it on the radar without teleporting the player
+3. Mobile players can use a D-pad or drag directly on the canvas to steer
+
+Current site panels:
+1. Signal Dossier shows the current district, coordinates, audio state, and station credits
+2. City Radar shows the whole looping map with station markers and your current position
+3. Unlocked Signals keeps quiet zones locked until you actually discover them in-world
+
+Current Bay Loop map notes:
+1. The live layout now uses a larger 64x48 peninsula/east-bay silhouette
+2. The viewport is widened to 24x18 so the world reads more like a broad overworld map
+3. `S` tiles are shallow or waterfront paths that look like water but remain walkable
+4. `~` tiles remain deep water and are blocked
+5. `H` tiles mark hills or ridgelines and are blocked
+6. The renderer adds shoreline accents so the bay contour reads cleaner at a distance
+
 ## Layout System
 
 The active layout defaults to `bay-loop`.
@@ -63,6 +81,14 @@ Current layout contract:
 9. optional `palette`
 
 Map rows may contain spaces for readability. The runtime strips spaces before validation.
+Supported map tiles:
+1. `.` roads or walkable land
+2. `P` plazas or special walkable landmarks
+3. `S` shallow or waterfront walkable tiles
+4. `=` bridges or causeways
+5. `B` blocked dense structures
+6. `H` blocked hills or ridgelines
+7. `~` blocked deep water
 
 ## Channel Contract
 
