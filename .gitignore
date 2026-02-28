@@ -1,0 +1,5 @@
+.DS_Store
+.neocities-deploy-manifest
+*.swp
+*.swo
+*~

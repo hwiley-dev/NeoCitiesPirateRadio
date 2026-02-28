@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NeoCities Pirate Radio: Bay Loop</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link id="layout-theme" rel="stylesheet" href="layouts/bay-loop/theme.css" />
+  </head>
+  <body>
+    <div class="scanlines" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <p class="tag" id="world-tag">CYBER BAY LOOP // FRIEND-LOVING RENEGADE DIY TRANSMISSIONS</p>
+      <h1 id="world-title">NeoCities Pirate Radio: Bay Loop City</h1>
+      <p class="subtag" id="world-subtag">
+        Loop the Bay Area city world with Arrow Keys/WASD or touch controls to unlock channels.
+      </p>
+      <p class="help" id="world-help">
+        Keyboard: Arrow Keys or WASD to move. Press M to toggle audio. Press X to stop. Cross an edge to loop around the city.
+      </p>
+    </header>
+
+    <main class="layout">
+      <section class="game-panel">
+        <canvas
+          id="game"
+          width="640"
+          height="448"
+          aria-label="8-bit city world with avatar and unlockable channels"
+        ></canvas>
+
+        <div class="hud">
+          <p id="coords">POS 00.0, 00.0</p>
+          <p id="sector">SECTOR: BAY LOOP</p>
+          <p id="signal">SIGNAL: ROAMING STATIC</p>
+        </div>
+
+        <div class="audio-bar">
+          <button id="audio-toggle" type="button">Enable Audio</button>
+          <button id="audio-stop" type="button">Stop Audio</button>
+          <p id="now-playing">NOW PLAYING: (none)</p>
+          <p id="audio-status">AUDIO STATUS: idle</p>
+        </div>
+
+        <div class="touch-controls" aria-label="Mobile movement controls">
+          <button data-key="arrowup">UP</button>
+          <button data-key="arrowleft">LEFT</button>
+          <button data-key="arrowdown">DOWN</button>
+          <button data-key="arrowright">RIGHT</button>
+        </div>
+      </section>
+
+      <aside class="terminal">
+        <h2>Unlocked Signals</h2>
+        <ul id="channel-list"></ul>
+
+        <h2>Transmission Log</h2>
+        <div id="log" aria-live="polite"></div>
+      </aside>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

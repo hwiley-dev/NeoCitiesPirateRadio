@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "channels": [
+    {
+      "id": "dock",
+      "name": "Dockside Solder Net",
+      "tileX": 4,
+      "tileY": 5,
+      "color": "#4dff9f",
+      "desc": "Open hardware fixes and boat-borne radio mods.",
+      "audio": {
+        "primaryUrl": "https://archive.org/download/the-great-aligning-hunter-wiley/The%20Great%20Aligning-Hunter-Wiley.mp3",
+        "fallbackUrl": "https://archive.org/download/the-great-aligning-hunter-wiley/The%20Great%20Aligning-Hunter-Wiley.mp3",
+        "license": "No reuse license listed on Internet Archive item; used here for site-owner testing.",
+        "attribution": "Hunter Wiley - The Great Aligning",
+        "durationSec": 86
+      }
+    },
+    {
+      "id": "rooftop",
+      "name": "Rooftop Dub Relay",
+      "tileX": 6,
+      "tileY": 2,
+      "color": "#f6bd60",
+      "desc": "Bass-heavy neighborhood broadcasts and sky-antenna jams.",
+      "audio": null
+    },
+    {
+      "id": "freesoft",
+      "name": "Free Software Mast",
+      "tileX": 23,
+      "tileY": 9,
+      "color": "#83c5be",
+      "desc": "Tools, scripts, and shared code for independent stations.",
+      "audio": null
+    },
+    {
+      "id": "basement",
+      "name": "Basement Tape Loop",
+      "tileX": 6,
+      "tileY": 17,
+      "color": "#ffafcc",
+      "desc": "Tape hiss, archival edits, and spoken zines.",
+      "audio": null
+    },
+    {
+      "id": "street",
+      "name": "Street Mic Cipher",
+      "tileX": 23,
+      "tileY": 16,
+      "color": "#9bf6ff",
+      "desc": "Live stories, spoken word, and direct-action dispatches.",
+      "audio": {
+        "primaryUrl": "https://archive.org/download/ghost-culture-hunter-wiley/Ghost-Culture_Hunter-Wiley.mp3",
+        "fallbackUrl": "https://archive.org/download/ghost-culture-hunter-wiley/Ghost-Culture_Hunter-Wiley.mp3",
+        "license": "No reuse license listed on Internet Archive item; used here for site-owner testing.",
+        "attribution": "Hunter Wiley feat. Krystle Pyette - Ghost Culture",
+        "durationSec": 265
+      }
+    }
+  ]
+}

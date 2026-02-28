@@ -1,0 +1,2 @@
+Expected fonts in this directory are typically licensed under the SIL Open Font License (OFL).
+When adding font files, include their upstream OFL license text in this directory.

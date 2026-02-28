@@ -1,0 +1,82 @@
+:root {
+  --bg-night: #030610;
+  --bg-deep: #091733;
+  --bg-haze: #102d52;
+  --panel: rgba(6, 10, 24, 0.9);
+  --panel-2: rgba(6, 12, 28, 0.95);
+  --panel-edge: #63ecff;
+  --panel-edge-hot: #ff568f;
+  --text-main: #f7fbff;
+  --text-dim: #8ec4ff;
+  --text-soft: #d0dcff;
+  --signal-hot: #ffe56d;
+  --signal-live: #7effc2;
+  --signal-locked: #6f82b6;
+}
+
+body[data-layout="bay-loop"] {
+  background:
+    radial-gradient(circle at 16% 18%, rgba(67, 240, 255, 0.34), transparent 24%),
+    radial-gradient(circle at 78% 14%, rgba(255, 86, 143, 0.28), transparent 20%),
+    radial-gradient(circle at 52% 100%, rgba(255, 229, 109, 0.12), transparent 22%),
+    linear-gradient(180deg, #07101f 0%, #0b1730 30%, #090814 100%);
+}
+
+body[data-layout="bay-loop"]::after {
+  content: "";
+  position: fixed;
+  inset: auto 0 0 0;
+  height: 34vh;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, transparent, rgba(6, 8, 18, 0.2) 35%, rgba(6, 8, 18, 0.72)),
+    linear-gradient(90deg,
+      transparent 0 6%,
+      rgba(99, 236, 255, 0.15) 6% 7%,
+      transparent 7% 10%,
+      rgba(255, 86, 143, 0.14) 10% 12%,
+      transparent 12% 18%,
+      rgba(99, 236, 255, 0.18) 18% 20%,
+      transparent 20% 24%,
+      rgba(255, 229, 109, 0.12) 24% 27%,
+      transparent 27% 34%,
+      rgba(99, 236, 255, 0.15) 34% 36%,
+      transparent 36% 44%,
+      rgba(255, 86, 143, 0.14) 44% 46%,
+      transparent 46% 55%,
+      rgba(99, 236, 255, 0.18) 55% 57%,
+      transparent 57% 66%,
+      rgba(255, 229, 109, 0.12) 66% 69%,
+      transparent 69% 78%,
+      rgba(99, 236, 255, 0.16) 78% 80%,
+      transparent 80% 100%);
+  mix-blend-mode: screen;
+  opacity: 0.7;
+}
+
+body[data-layout="bay-loop"] .site-header,
+body[data-layout="bay-loop"] .game-panel,
+body[data-layout="bay-loop"] .terminal {
+  backdrop-filter: blur(2px);
+}
+
+body[data-layout="bay-loop"] .site-header h1 {
+  color: #fff4a6;
+  text-shadow: 0 0 18px rgba(255, 229, 109, 0.24);
+}
+
+body[data-layout="bay-loop"] .tag {
+  color: #7df6ff;
+}
+
+body[data-layout="bay-loop"] .help,
+body[data-layout="bay-loop"] #audio-status {
+  color: #ffd0ea;
+}
+
+body[data-layout="bay-loop"] #game {
+  box-shadow:
+    0 0 28px rgba(99, 236, 255, 0.14),
+    inset 0 0 0 2px rgba(255, 86, 143, 0.18);
+}

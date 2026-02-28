@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "id": "bay-loop",
+  "name": "Bay Loop City",
+  "themeHref": "layouts/bay-loop/theme.css",
+  "blockedTiles": ["B", "~"],
+  "viewport": {
+    "width": 20,
+    "height": 14
+  },
+  "spawn": {
+    "x": 2.5,
+    "y": 7.5
+  },
+  "copy": {
+    "tag": "CYBER BAY LOOP // FRIEND-LOVING RENEGADE DIY TRANSMISSIONS",
+    "title": "NeoCities Pirate Radio: Bay Loop City",
+    "subtitle": "Walk a neon Bay Area city map to unlock rogue channels and trigger transmissions.",
+    "help": "Keyboard: Arrow Keys or WASD to move. Press M to toggle audio. Press X to stop. Cross any edge to loop around the city."
+  },
+  "palette": {
+    "roadDark": "#070d22",
+    "roadLight": "#0e1a3f",
+    "roadInset": "#12224b",
+    "roadLine": "#76f8ff",
+    "waterDark": "#041126",
+    "waterLight": "#0a2348",
+    "waterGlow": "#37d8ff",
+    "bridgeBase": "#131934",
+    "bridgeDeck": "#203266",
+    "bridgeRail": "#ff4fa3",
+    "bridgeLight": "#ffe56d",
+    "buildingBase": "#170d30",
+    "buildingFace": "#34205f",
+    "buildingWindowA": "#ffe56d",
+    "buildingWindowB": "#6ff8ff",
+    "buildingWindowC": "#ff84cf",
+    "plazaGlow": "rgba(255, 79, 163, 0.28)",
+    "labelBg": "rgba(6, 10, 22, 0.85)",
+    "wrapTop": "rgba(111, 248, 255, 0.2)",
+    "wrapSide": "rgba(255, 79, 163, 0.2)",
+    "playerShadow": "rgba(4, 6, 15, 0.45)",
+    "playerSkin": "#fdf3c8",
+    "playerHair": "#ff5ea8",
+    "playerCoat": "#29d8ff",
+    "playerTrim": "#ffe56d",
+    "playerEye": "#18243f",
+    "playerShoe": "#fefefe"
+  },
+  "districts": [
+    {
+      "name": "Sunset Marina",
+      "label": "SF",
+      "x1": 0,
+      "x2": 9,
+      "y1": 0,
+      "y2": 8,
+      "labelX": 1,
+      "labelY": 1,
+      "color": "#6ff8ff"
+    },
+    {
+      "name": "Mission Neon",
+      "label": "MSN",
+      "x1": 0,
+      "x2": 11,
+      "y1": 9,
+      "y2": 15,
+      "labelX": 1,
+      "labelY": 12,
+      "color": "#ff82cc"
+    },
+    {
+      "name": "Oakland Arcology",
+      "label": "OAK",
+      "x1": 16,
+      "x2": 31,
+      "y1": 0,
+      "y2": 11,
+      "labelX": 19,
+      "labelY": 2,
+      "color": "#ffe56d"
+    },
+    {
+      "name": "Berkeley Patch",
+      "label": "BKY",
+      "x1": 16,
+      "x2": 31,
+      "y1": 12,
+      "y2": 15,
+      "labelX": 19,
+      "labelY": 13,
+      "color": "#8effb7"
+    },
+    {
+      "name": "South Bay Loop",
+      "label": "SJ",
+      "x1": 8,
+      "x2": 31,
+      "y1": 16,
+      "y2": 21,
+      "labelX": 19,
+      "labelY": 18,
+      "color": "#7cabff"
+    }
+  ],
+  "trafficLanes": [
+    {
+      "row": 0.5,
+      "start": 0,
+      "end": 32,
+      "speed": 4.2,
+      "color": "#ffe56d",
+      "count": 8
+    },
+    {
+      "row": 7.5,
+      "start": 0,
+      "end": 32,
+      "speed": -5.1,
+      "color": "#7dffbb",
+      "count": 8
+    },
+    {
+      "row": 14.5,
+      "start": 0,
+      "end": 32,
+      "speed": 3.7,
+      "color": "#35d6ff",
+      "count": 8
+    },
+    {
+      "row": 21.5,
+      "start": 0,
+      "end": 32,
+      "speed": -4.0,
+      "color": "#ff4fa3",
+      "count": 8
+    }
+  ],
+  "map": [
+    "........ ........ ........ ........",
+    ".BBB..P. ...~~~~. ...P..BB B.......",
+    ".B.P..P. ...~~~~. ...P..P. B.......",
+    ".B....== =..~~~~. ..===... .B......",
+    ".BBB..== =..~~~~. ..===..B BB......",
+    "...P..== =..~~~~. ..===..P ........",
+    "......== =..~~~~. ..===... ........",
+    "======.= =..~~~~. ..==.=== ========",
+    "......== =..~~~~. ..===... ..P.....",
+    "...P..== =..~~~~. ..===..P ..BBB...",
+    ".BBB..== =..~~~~. ..===... .B.P....",
+    ".B.P..== =..~~~~. ..===..B BB......",
+    ".B....== =..~~~~. ..===... ..P.....",
+    ".BBB..P. ...~~~~. ...P..BB B.......",
+    "........ ..P~~~~P ........ ..P.....",
+    ".BBB..P. ...~~~~. ...P..BB B.......",
+    ".B.P.... ...====. .......P .B......",
+    ".B....P. ........ ..P..... .B......",
+    ".BBB.... ..P..... ..P..... BBB.....",
+    "...P..BB B...P..P ....BBB. .P......",
+    "......B. P....... ........ P.B.....",
+    "........ ........ ........ ........"
+  ]
+}
