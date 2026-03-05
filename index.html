@@ -18,7 +18,7 @@
         <p class="attract-tag">BOOT SEQUENCE // BAY LOOP PIRATE BAND</p>
         <h1 id="attract-title">NeoCities Pirate Radio</h1>
         <p class="attract-copy" id="attract-copy">
-          Walk the looped city, tune rogue transmitters, and trace quiet relay points across the bay.
+          Walk a brighter 16-bit Bay Area overworld, tune rogue transmitters, and spot landmark pulses across a more detailed bay terrain.
         </p>
 
         <div class="attract-grid">
@@ -32,7 +32,7 @@
             <h2>New Gear</h2>
             <p>Tap signals in the terminal to track them</p>
             <p>Drag on the world screen to steer on mobile</p>
-            <p>Use the radar to hunt the next beacon</p>
+            <p>Use the radar to hunt beacons and bay landmarks</p>
           </div>
         </div>
 
@@ -49,10 +49,10 @@
       <p class="tag" id="world-tag">CYBER BAY LOOP // FRIEND-LOVING RENEGADE DIY TRANSMISSIONS</p>
       <h1 id="world-title">NeoCities Pirate Radio: Bay Loop City</h1>
       <p class="subtag" id="world-subtag">
-        Loop the Bay Area city world with Arrow Keys/WASD or touch controls to unlock channels.
+        Traverse a brighter 16-bit Bay Area overworld with landmarks, moving weather, aerial terrain detail, and unlockable pirate signals.
       </p>
       <p class="help" id="world-help">
-        Keyboard: Arrow Keys or WASD to move. Touch: hold the D-pad or drag on the map. Press M to toggle audio, X to stop, and tap a signal row to track it.
+        Keyboard: Arrow Keys or WASD to move. Touch: hold the D-pad or drag on the map. Press M to toggle audio, X to stop, tap a signal row to track it, collect tapes on live signals, and play from Walkman Deck.
       </p>
     </header>
 
@@ -63,13 +63,14 @@
           width="640"
           height="448"
           tabindex="0"
-          aria-label="8-bit city world with avatar and unlockable channels"
+          aria-label="16-bit Bay Area overworld with avatar, landmarks, and unlockable channels"
         ></canvas>
 
         <div class="hud">
           <p id="coords">POS 00.0, 00.0</p>
           <p id="sector">SECTOR: BAY LOOP</p>
           <p id="signal">SIGNAL: ROAMING STATIC</p>
+          <p id="landmark">LANDMARK: SCANNING</p>
         </div>
 
         <div class="audio-bar">
@@ -135,6 +136,15 @@
             <p class="radar-copy">TAP TO TRACK</p>
           </div>
           <ul id="channel-list"></ul>
+        </section>
+
+        <section class="terminal-section walkman-panel">
+          <div class="terminal-heading">
+            <h2>Walkman Deck</h2>
+            <p class="radar-copy" id="walkman-count">TAPES 0/0</p>
+          </div>
+          <p class="walkman-copy" id="walkman-copy">Collect live signal tapes and play them anywhere.</p>
+          <ul id="walkman-list"></ul>
         </section>
 
         <section class="terminal-section">

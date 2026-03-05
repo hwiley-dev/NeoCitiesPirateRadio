@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 1536" role="img" aria-label="Stylized Bay Area aerial overlay">
+  <defs>
+    <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#77c8ee" />
+      <stop offset="48%" stop-color="#4f9dc5" />
+      <stop offset="100%" stop-color="#2e5d82" />
+    </linearGradient>
+    <linearGradient id="terrain" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#9b8159" />
+      <stop offset="52%" stop-color="#7a6846" />
+      <stop offset="100%" stop-color="#5f5236" />
+    </linearGradient>
+    <linearGradient id="urban" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#cdd4db" />
+      <stop offset="100%" stop-color="#8f9aaa" />
+    </linearGradient>
+    <pattern id="grain" width="24" height="24" patternUnits="userSpaceOnUse">
+      <rect width="24" height="24" fill="transparent" />
+      <circle cx="4" cy="6" r="1" fill="#ffffff" fill-opacity="0.08" />
+      <circle cx="14" cy="11" r="1" fill="#ffffff" fill-opacity="0.08" />
+      <circle cx="20" cy="19" r="1" fill="#ffffff" fill-opacity="0.08" />
+      <circle cx="8" cy="20" r="1" fill="#101922" fill-opacity="0.08" />
+    </pattern>
+  </defs>
+
+  <rect width="2048" height="1536" fill="url(#ocean)" />
+
+  <path
+    d="M220 130 L360 100 L470 150 L560 230 L650 340 L720 510 L750 700 L780 910 L770 1060 L730 1190 L610 1330 L460 1400 L340 1340 L270 1210 L230 1000 L200 740 L200 500 L210 300 Z"
+    fill="url(#terrain)"
+    fill-opacity="0.9"
+  />
+  <path
+    d="M930 220 L1140 180 L1330 240 L1490 410 L1600 620 L1680 860 L1720 1080 L1700 1270 L1600 1400 L1440 1460 L1280 1400 L1170 1260 L1110 1060 L1060 830 L980 600 L890 420 Z"
+    fill="url(#terrain)"
+    fill-opacity="0.88"
+  />
+  <path
+    d="M850 1120 L980 1080 L1120 1100 L1240 1180 L1320 1300 L1340 1420 L1280 1510 L1130 1530 L980 1480 L870 1380 L820 1250 Z"
+    fill="#7f714e"
+    fill-opacity="0.82"
+  />
+  <path
+    d="M210 120 L330 90 L420 130 L470 180 L390 230 L300 210 L220 180 Z"
+    fill="#8f7a52"
+    fill-opacity="0.86"
+  />
+
+  <path
+    d="M560 460 L760 420 L890 540 L930 680 L880 820 L760 900 L610 870 L520 760 L510 620 Z"
+    fill="url(#urban)"
+    fill-opacity="0.62"
+  />
+  <path
+    d="M1120 470 L1360 430 L1530 600 L1600 790 L1550 980 L1410 1080 L1210 1060 L1080 910 L1050 700 Z"
+    fill="url(#urban)"
+    fill-opacity="0.58"
+  />
+  <path
+    d="M980 1180 L1120 1150 L1240 1210 L1290 1320 L1240 1430 L1120 1470 L1000 1420 L940 1300 Z"
+    fill="url(#urban)"
+    fill-opacity="0.5"
+  />
+
+  <path d="M740 320 L1080 340 L1300 520 L1260 560 L1040 410 L760 390 Z" fill="#d5e4c0" fill-opacity="0.42" />
+  <path d="M860 930 L1120 920 L1290 1090 L1250 1120 L1080 980 L870 980 Z" fill="#d8e8c5" fill-opacity="0.36" />
+
+  <path d="M460 250 L760 280" stroke="#d0d5da" stroke-opacity="0.4" stroke-width="16" stroke-linecap="round" />
+  <path d="M730 500 L1120 620" stroke="#d0d5da" stroke-opacity="0.34" stroke-width="14" stroke-linecap="round" />
+  <path d="M790 930 L1220 980" stroke="#d0d5da" stroke-opacity="0.3" stroke-width="14" stroke-linecap="round" />
+
+  <path d="M1380 220 L1700 360 L1860 620 L1910 820 L1890 1120 L1780 1370" stroke="#5a4b33" stroke-opacity="0.45" stroke-width="54" stroke-linecap="round" />
+  <path d="M1320 280 L1600 460 L1710 720 L1710 980 L1620 1260" stroke="#8f7651" stroke-opacity="0.42" stroke-width="34" stroke-linecap="round" />
+
+  <rect width="2048" height="1536" fill="url(#grain)" />
+</svg>

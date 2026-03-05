@@ -4,40 +4,54 @@ const DEFAULT_LAYOUT_ID = "bay-loop";
 const DEFAULT_COPY = {
   tag: "CYBER BAY LOOP // FRIEND-LOVING RENEGADE DIY TRANSMISSIONS",
   title: "NeoCities Pirate Radio: Bay Loop City",
-  subtitle: "Trace an expanded Bay Area world map with a sharper peninsula, bridges, and east bay contour.",
-  help: "Keyboard: Arrow Keys or WASD to move. Touch: hold the D-pad or drag on the map. Press M to toggle audio, X to stop, and tap a signal row to track it.",
+  subtitle: "Trace a brighter 16-bit Bay Area overworld with moving fog, landmark beacons, and aerial terrain detail.",
+  help: "Keyboard: Arrow Keys or WASD to move. Touch: hold the D-pad or drag on the map. Press M to toggle audio, X to stop, tap a signal row to track it, collect tapes on live signals, and play them from Walkman Deck.",
 };
 
 const DEFAULT_PALETTE = {
-  roadDark: "#0a1024",
-  roadLight: "#0c1530",
-  roadInset: "#101c3c",
-  roadLine: "#6ff8ff",
-  roadGlow: "#224f79",
-  shoalDark: "#0a3151",
-  shoalLight: "#145882",
-  shoalGlow: "#93f7ff",
-  waterDark: "#04162a",
-  waterLight: "#0a2748",
-  waterGlow: "#37d8ff",
-  coastBright: "#9cf8ff",
-  coastShadow: "rgba(7, 18, 45, 0.88)",
-  bridgeBase: "#111738",
-  bridgeDeck: "#1a2756",
-  bridgeRail: "#ff4fa3",
-  bridgeLight: "#ffe56d",
-  hillBase: "#1c2226",
-  hillShade: "#30473c",
-  hillGlow: "#8fcf8d",
-  buildingBase: "#1a0f36",
-  buildingFace: "#332061",
-  buildingWindowA: "#ffe56d",
-  buildingWindowB: "#6ff8ff",
-  buildingWindowC: "#ff84cf",
-  plazaGlow: "rgba(255, 79, 163, 0.28)",
-  labelBg: "rgba(6, 10, 22, 0.85)",
-  wrapTop: "rgba(111, 248, 255, 0.18)",
-  wrapSide: "rgba(255, 79, 163, 0.18)",
+  roadDark: "#7e8f5c",
+  roadLight: "#96a96f",
+  roadInset: "#bfc799",
+  roadLine: "#f6e7bf",
+  roadGlow: "#6a7950",
+  shoalDark: "#57b8c9",
+  shoalLight: "#86d9e8",
+  shoalGlow: "#f9efae",
+  waterDark: "#2f84b8",
+  waterLight: "#49a7d7",
+  waterGlow: "#d9f4ff",
+  waterSpark: "#f8ffff",
+  coastBright: "#f2d6a3",
+  coastShadow: "rgba(95, 73, 45, 0.34)",
+  bridgeBase: "#93573b",
+  bridgeDeck: "#be7b56",
+  bridgeRail: "#ff6b5d",
+  bridgeLight: "#ffe99c",
+  hillBase: "#6a6441",
+  hillShade: "#847a4f",
+  hillGlow: "#c6b57b",
+  buildingBase: "#565f6d",
+  buildingFace: "#8c99ad",
+  buildingWindowA: "#fff3a2",
+  buildingWindowB: "#e8fdff",
+  buildingWindowC: "#ffd29e",
+  plazaGlow: "rgba(246, 228, 168, 0.38)",
+  labelBg: "rgba(34, 44, 55, 0.74)",
+  wrapTop: "rgba(255, 255, 255, 0.22)",
+  wrapSide: "rgba(255, 205, 105, 0.22)",
+  fogLight: "rgba(250, 255, 255, 0.76)",
+  fogShadow: "rgba(150, 217, 246, 0.28)",
+  treeDark: "#356142",
+  treeLight: "#8dbe61",
+  reedDark: "#4f7448",
+  reedLight: "#f1ffab",
+  landmarkOutline: "#1c313d",
+  birdDark: "#263845",
+  cityDark: "#6d737e",
+  cityLight: "#9da4af",
+  cityLine: "#d4d7dc",
+  soilDark: "#7d6644",
+  soilLight: "#9e8258",
   playerShadow: "rgba(4, 6, 15, 0.45)",
   playerSkin: "#fdf3c8",
   playerHair: "#ff5ea8",
@@ -57,7 +71,7 @@ const FALLBACK_LAYOUT_RAW = {
   spawn: { x: 20.5, y: 13.5 },
   copy: DEFAULT_COPY,
   districts: [
-    { name: "North Peninsula", label: "SF", x1: 11, x2: 30, y1: 3, y2: 22, labelX: 16, labelY: 12, color: "#6ff8ff" },
+    { name: "North Peninsula", label: "SF", x1: 6, x2: 30, y1: 0, y2: 22, labelX: 16, labelY: 12, color: "#6ff8ff" },
     { name: "South Peninsula", label: "PEN", x1: 11, x2: 35, y1: 23, y2: 47, labelX: 20, labelY: 33, color: "#ff82cc" },
     { name: "East Bay North", label: "OAK", x1: 38, x2: 63, y1: 0, y2: 22, labelX: 46, labelY: 14, color: "#ffe56d" },
     { name: "East Bay South", label: "EBY", x1: 40, x2: 63, y1: 23, y2: 47, labelX: 49, labelY: 33, color: "#8effb7" },
@@ -69,12 +83,101 @@ const FALLBACK_LAYOUT_RAW = {
     { row: 29.5, start: 15, end: 54, speed: 3.7, color: "#35d6ff", count: 12 },
     { row: 35.5, start: 18, end: 55, speed: -4.0, color: "#ff4fa3", count: 12 },
   ],
+  landmarks: [
+    {
+      id: "golden-gate",
+      name: "Golden Gate",
+      shortLabel: "GG",
+      kind: "bridge",
+      axis: "vertical",
+      x: 19.2,
+      y: 2.0,
+      color: "#ff6b5d",
+      desc: "Fog drifts through the north strait where the Golden Gate spans from SF to the Marin headlands.",
+    },
+    {
+      id: "sutro-tower",
+      name: "Sutro Tower",
+      shortLabel: "SUTRO",
+      kind: "radio",
+      x: 16.6,
+      y: 11.2,
+      color: "#fff09b",
+      desc: "The west-side broadcast crown sits high above the city grid, blinking over the peninsula hills.",
+    },
+    {
+      id: "salesforce-tower",
+      name: "Salesforce Tower",
+      shortLabel: "SF",
+      kind: "tower",
+      x: 23.8,
+      y: 14.2,
+      color: "#d9fbff",
+      desc: "Downtown San Francisco rises here, anchored by a tall neon-glass spire over the bay edge.",
+    },
+    {
+      id: "alcatraz",
+      name: "Alcatraz",
+      shortLabel: "ALC",
+      kind: "island",
+      x: 33.2,
+      y: 10.8,
+      color: "#ffe5b7",
+      desc: "A small island silhouette sits between the bridge line and the Golden Gate approach.",
+    },
+    {
+      id: "bay-bridge",
+      name: "Bay Bridge",
+      shortLabel: "BB",
+      kind: "bridge",
+      axis: "horizontal",
+      x: 36.5,
+      y: 15.4,
+      color: "#ffd36a",
+      desc: "The main bridge span throws traffic lights from San Francisco into Oakland across the central bay.",
+    },
+    {
+      id: "port-oakland",
+      name: "Port of Oakland",
+      shortLabel: "PORT",
+      kind: "port",
+      x: 45.2,
+      y: 18.4,
+      color: "#79ffcf",
+      desc: "Container cranes stack up on the Oakland waterfront with blinking yard lights and cargo rails.",
+    },
+    {
+      id: "redwood-stand",
+      name: "Peninsula Redwoods",
+      shortLabel: "RED",
+      kind: "grove",
+      x: 18.2,
+      y: 36.5,
+      color: "#8fff8e",
+      desc: "A tall grove marks the greener peninsula spine, swaying above the coastal neighborhoods.",
+    },
+    {
+      id: "salt-ponds",
+      name: "South Bay Salt Ponds",
+      shortLabel: "SALT",
+      kind: "pond",
+      x: 39.4,
+      y: 44.0,
+      color: "#9ce7ff",
+      desc: "Bright south-bay evaporation ponds and marsh water ripple in a broad geometric basin.",
+    },
+  ],
+  aerialOverlay: {
+    src: "assets/images/bay-aerial-overlay.svg",
+    opacity: 0.28,
+    blendMode: "multiply",
+  },
   palette: DEFAULT_PALETTE,
   map: [
-    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~S.........HHHHHH",
-    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~S...........HHHHHH",
-    "~~~~~~~~~~~~~~~~~~~.~~~~~~~~~~~~~~~~~~~~~~~~~S............HHHHHH",
-    "~~~~~~~~~~~~~~~~~~....~~~~~~~~~~~~~~~~~~~~~~S.............HHHHHH",
+    "~~~~~~~~~~~~~~~~~~...~~~~~~~~~~~~~~~~~~~~~~~~~~~S.........HHHHHH",
+    "~~~~~~~~~~~~~~~~~~~=~~~~~~~~~~~~~~~~~~~~~~~~~~S...........HHHHHH",
+    "~~~~~~~~~~~~~~~~~~~=~~~~~~~~~~~~~~~~~~~~~~~~S.............HHHHHH",
+    "~~~~~~~~~~~~~~~~~~~=~~~~~~~~~~~~~~~~~~~~~~~~S.............HHHHHH",
     "~~~~~~~~~~~~~~~......S~~~~~~~~~~~~~~~~~~~~~S..............HHHHHH",
     "~~~~~~~~~~~~~~~.......S~~~~~~~~~~~~~~~~~~~S...............HHHHHH",
     "~~~~~~~~~~~~~~S........S~~~~~~~~~~~~~~~~~~S...............HHHHHH",
@@ -118,7 +221,7 @@ const FALLBACK_LAYOUT_RAW = {
     "~~~~~~~~~~~~~~~~~~~HHHH.........SSS~~~~~~~~~SSSSSS........HHHHHH",
     "~~~~~~~~~~~~~~~~~~~~HHHH.........SS~~~~~~~~~SSSSSS........HHHHHH",
     "~~~~~~~~~~~~~~~~~~~~HHHH.........SS~~~~~~~~~SSSSSSS.......HHHHHH",
-    "~~~~~~~~~~~~~~~~~~~~~.............SS~~~~~~~~SSSSSSS.......HHHHHH",
+    "~~~~~~~~~~~~~~~~~~.~~.............SS~~~~~~~~SSSSSSS.......HHHHHH",
   ],
 };
 
@@ -186,6 +289,7 @@ ctx.imageSmoothingEnabled = false;
 const coordsEl = document.getElementById("coords");
 const sectorEl = document.getElementById("sector");
 const signalEl = document.getElementById("signal");
+const landmarkEl = document.getElementById("landmark");
 const listEl = document.getElementById("channel-list");
 const logEl = document.getElementById("log");
 const radarCanvas = document.getElementById("radar");
@@ -207,6 +311,9 @@ const dossierDescEl = document.getElementById("dossier-desc");
 const dossierMetaPrimaryEl = document.getElementById("dossier-meta-primary");
 const dossierMetaSecondaryEl = document.getElementById("dossier-meta-secondary");
 const dossierCreditEl = document.getElementById("dossier-credit");
+const walkmanCountEl = document.getElementById("walkman-count");
+const walkmanCopyEl = document.getElementById("walkman-copy");
+const walkmanListEl = document.getElementById("walkman-list");
 const attractEl = document.getElementById("attract-screen");
 const attractCopyEl = document.getElementById("attract-copy");
 const attractStatusEl = document.getElementById("attract-status");
@@ -228,6 +335,8 @@ const state = {
   radius: 0.28,
   speed: 3.9,
   unlocked: new Set(),
+  discoveredLandmarks: new Set(),
+  collectedTapeIds: new Set(),
   keyboardKeys: createDirectionalState(),
   touchKeys: createDirectionalState(),
   dragKeys: createDirectionalState(),
@@ -235,6 +344,8 @@ const state = {
   channelsById: new Map(),
   activeChannelId: null,
   trackedChannelId: null,
+  walkmanChannelId: null,
+  playbackSource: null,
   tick: 0,
   facing: "right",
   moving: false,
@@ -253,7 +364,12 @@ const state = {
   dragPointerId: null,
   dragOriginX: 0,
   dragOriginY: 0,
+  aerialOverlayImage: null,
+  aerialOverlaySource: null,
+  aerialOverlayFailed: false,
 };
+
+const aerialOverlayCache = new Map();
 
 function resolveRequestedLayoutId() {
   const queryValue = new URLSearchParams(window.location.search).get("layout") || DEFAULT_LAYOUT_ID;
@@ -491,6 +607,11 @@ function getTrackedChannel() {
   return getChannelById(state.trackedChannelId);
 }
 
+function getLandmarkById(landmarkId, layout = currentLayout()) {
+  if (!landmarkId) return null;
+  return layout.landmarks.find((landmark) => landmark.id === landmarkId) || null;
+}
+
 function renderAudioControls() {
   const locked = Boolean(state.audioLockedReason);
   audioToggleEl.disabled = locked;
@@ -528,7 +649,9 @@ function clearAudioRuntimes() {
   });
   state.audioRuntimeById.clear();
   state.currentAudio = null;
+  state.playbackSource = null;
   renderAudioControls();
+  renderWalkmanDeck();
 }
 
 function stopCurrentAudio() {
@@ -540,7 +663,9 @@ function stopCurrentAudio() {
   state.currentAudio.pause();
   state.currentAudio.currentTime = 0;
   state.currentAudio = null;
+  state.playbackSource = null;
   renderAudioControls();
+  renderWalkmanDeck();
 }
 
 function isPlainObject(value) {
@@ -693,6 +818,118 @@ function normalizeTrafficLane(raw, index, layout, errors) {
   };
 }
 
+function normalizeAerialOverlay(raw, errors) {
+  if (raw === undefined || raw === null) {
+    return null;
+  }
+
+  if (!isPlainObject(raw)) {
+    errors.push("aerialOverlay must be an object");
+    return null;
+  }
+
+  const startErrors = errors.length;
+  const src = typeof raw.src === "string" ? raw.src.trim() : "";
+  const opacity = Number.isFinite(raw.opacity) ? raw.opacity : 0.28;
+  const blendMode = typeof raw.blendMode === "string" ? raw.blendMode.trim() : "multiply";
+  const allowedBlendModes = new Set(["normal", "multiply", "screen", "overlay", "soft-light", "hard-light"]);
+
+  if (src.length < 3) {
+    errors.push("aerialOverlay.src must be a non-empty path");
+  }
+
+  if (opacity < 0 || opacity > 1) {
+    errors.push("aerialOverlay.opacity must be between 0 and 1");
+  }
+
+  if (!allowedBlendModes.has(blendMode)) {
+    errors.push("aerialOverlay.blendMode must be one of normal, multiply, screen, overlay, soft-light, hard-light");
+  }
+
+  if (startErrors !== errors.length) {
+    return null;
+  }
+
+  return {
+    src,
+    opacity,
+    blendMode,
+  };
+}
+
+function normalizeLandmark(raw, index, layout, ids, errors) {
+  const startErrors = errors.length;
+
+  if (!isPlainObject(raw)) {
+    errors.push(`landmarks[${index}] is not an object`);
+    return null;
+  }
+
+  const id = raw.id;
+  const name = raw.name;
+  const shortLabel = raw.shortLabel;
+  const kind = raw.kind;
+  const axis = raw.axis;
+  const x = raw.x;
+  const y = raw.y;
+  const color = raw.color;
+  const desc = raw.desc;
+
+  if (typeof id !== "string" || !/^[a-z0-9-]+$/.test(id)) {
+    errors.push(`landmarks[${index}].id must contain only lowercase letters, numbers, and dashes`);
+  } else if (ids.has(id)) {
+    errors.push(`landmarks[${index}].id is duplicated (${id})`);
+  }
+
+  if (typeof name !== "string" || name.trim().length < 2) {
+    errors.push(`landmarks[${index}].name must be a non-empty string`);
+  }
+
+  if (typeof shortLabel !== "string" || shortLabel.trim().length < 1 || shortLabel.trim().length > 6) {
+    errors.push(`landmarks[${index}].shortLabel must be 1-6 characters`);
+  }
+
+  if (typeof kind !== "string" || kind.trim().length < 2) {
+    errors.push(`landmarks[${index}].kind must be a string`);
+  }
+
+  if (axis !== undefined && axis !== "horizontal" && axis !== "vertical") {
+    errors.push(`landmarks[${index}].axis must be either horizontal or vertical`);
+  }
+
+  if (!Number.isFinite(x) || !Number.isFinite(y)) {
+    errors.push(`landmarks[${index}].x and .y must be numeric`);
+  } else if (x < 0 || x >= layout.mapWidth || y < 0 || y >= layout.mapHeight) {
+    errors.push(`landmarks[${index}] coordinates are outside map bounds`);
+  }
+
+  if (!isHexColor(color)) {
+    errors.push(`landmarks[${index}].color must be #RRGGBB`);
+  }
+
+  if (typeof desc !== "string" || desc.trim().length < 6) {
+    errors.push(`landmarks[${index}].desc must be a meaningful string`);
+  }
+
+  if (startErrors !== errors.length) {
+    return null;
+  }
+
+  ids.add(id);
+
+  return {
+    id,
+    name: name.trim(),
+    shortLabel: shortLabel.trim().toUpperCase(),
+    kind: kind.trim(),
+    axis: axis === "vertical" ? "vertical" : axis === "horizontal" ? "horizontal" : null,
+    x,
+    y,
+    color,
+    desc: desc.trim(),
+  };
+}
+
 function normalizeLayout(raw) {
   const errors = [];
 
@@ -782,6 +1019,8 @@ function normalizeLayout(raw) {
     copy,
     districts: [],
     trafficLanes: [],
+    landmarks: [],
+    aerialOverlay: null,
     palette,
   };
 
@@ -810,6 +1049,19 @@ function normalizeLayout(raw) {
       }
     });
   }
+
+  if (Array.isArray(raw.landmarks)) {
+    const ids = new Set();
+    raw.landmarks.forEach((landmark, index) => {
+      const startingErrors = errors.length;
+      const normalized = normalizeLandmark(landmark, index, layout, ids, errors);
+      if (normalized && startingErrors === errors.length) {
+        layout.landmarks.push(normalized);
+      }
+    });
+  }
+
+  layout.aerialOverlay = normalizeAerialOverlay(raw.aerialOverlay, errors);
 
   if (errors.length > 0) {
     throw new Error(errors.join(" | "));
@@ -853,9 +1105,45 @@ function syncRadarCanvas(layout) {
   radarCanvas.height = layout.mapHeight * state.radarScale;
 }
 
+function prepareAerialOverlay(layout) {
+  state.aerialOverlayImage = null;
+  state.aerialOverlaySource = null;
+  state.aerialOverlayFailed = false;
+
+  const overlay = layout.aerialOverlay;
+  if (!overlay) {
+    return;
+  }
+
+  if (aerialOverlayCache.has(overlay.src)) {
+    state.aerialOverlayImage = aerialOverlayCache.get(overlay.src);
+    state.aerialOverlaySource = overlay.src;
+    return;
+  }
+
+  const image = new Image();
+  image.decoding = "async";
+  image.addEventListener("load", () => {
+    aerialOverlayCache.set(overlay.src, image);
+    if (currentLayout().aerialOverlay?.src === overlay.src) {
+      state.aerialOverlayImage = image;
+      state.aerialOverlaySource = overlay.src;
+      draw();
+    }
+  });
+  image.addEventListener("error", () => {
+    if (!state.aerialOverlayFailed && currentLayout().aerialOverlay?.src === overlay.src) {
+      state.aerialOverlayFailed = true;
+      pushLog(`Aerial overlay failed to load: ${overlay.src}`);
+    }
+  });
+  image.src = overlay.src;
+}
+
 function setLayout(layout) {
   state.layout = layout;
   state.unlocked.clear();
+  state.discoveredLandmarks.clear();
   state.activeChannelId = null;
   state.trackedChannelId = null;
   state.x = wrapCoord(layout.spawn.x, layout.mapWidth);
@@ -868,6 +1156,7 @@ function setLayout(layout) {
 
   applyLayoutChrome(layout);
   syncRadarCanvas(layout);
+  prepareAerialOverlay(layout);
 }
 
 async function initLayout() {
@@ -1030,10 +1319,14 @@ function setChannels(channels) {
   state.channels = channels;
   state.channelsById = new Map(channels.map((channel) => [channel.id, channel]));
   state.unlocked.clear();
+  state.collectedTapeIds.clear();
   state.activeChannelId = null;
   state.trackedChannelId = null;
+  state.walkmanChannelId = null;
+  state.playbackSource = null;
   clearAudioRuntimes();
   renderChannels();
+  renderWalkmanDeck();
   renderTrackingControls();
 }
 
@@ -1055,6 +1348,104 @@ async function initChannels() {
 function getChannelById(channelId) {
   if (!channelId) return null;
   return state.channelsById.get(channelId) || null;
+}
+
+function collectedTapeChannels() {
+  return state.channels.filter((channel) => channel.audio && state.collectedTapeIds.has(channel.id));
+}
+
+function activeWalkmanChannel() {
+  const channel = getChannelById(state.walkmanChannelId);
+  if (!channel || !state.collectedTapeIds.has(channel.id) || !channel.audio) {
+    return null;
+  }
+  return channel;
+}
+
+function isWalkmanPlaybackActive() {
+  return state.playbackSource === "walkman" && Boolean(state.currentAudio) && Boolean(activeWalkmanChannel());
+}
+
+function renderWalkmanDeck() {
+  const totalLive = state.channels.filter((channel) => Boolean(channel.audio)).length;
+  const collected = collectedTapeChannels();
+  walkmanCountEl.textContent = `TAPES ${collected.length}/${totalLive}`;
+  walkmanListEl.innerHTML = "";
+
+  if (collected.length === 0) {
+    walkmanCopyEl.textContent = "Find and unlock live signals to collect cassettes.";
+    return;
+  }
+
+  const selected = activeWalkmanChannel();
+  walkmanCopyEl.textContent = selected
+    ? isWalkmanPlaybackActive()
+      ? `PLAYING: ${selected.name}`
+      : `DECK LOADED: ${selected.name}`
+    : "Select a tape to load your Walkman.";
+
+  collected.forEach((channel) => {
+    const li = document.createElement("li");
+    const selectedTape = state.walkmanChannelId === channel.id;
+    const playingTape = selectedTape && isWalkmanPlaybackActive();
+    li.className = playingTape ? "playing" : selectedTape ? "loaded" : "idle";
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "walkman-button";
+    button.dataset.channelId = channel.id;
+    button.setAttribute("aria-pressed", String(selectedTape));
+    button.title = selectedTape ? "Stop this tape" : `Load ${channel.name}`;
+
+    const name = document.createElement("span");
+    name.className = "name";
+    name.textContent = channel.name;
+
+    const status = document.createElement("span");
+    status.className = "status";
+    status.textContent = playingTape ? "PLAYING" : selectedTape ? "LOADED" : "READY";
+
+    button.append(name, status);
+    li.appendChild(button);
+    walkmanListEl.appendChild(li);
+  });
+}
+
+function landmarkMetrics(landmark) {
+  const layout = currentLayout();
+  const dx = shortestWrappedDelta(landmark.x, state.x, layout.mapWidth);
+  const dy = shortestWrappedDelta(landmark.y, state.y, layout.mapHeight);
+
+  return {
+    distance: Math.hypot(dx, dy),
+    direction: describeDirection(dx, dy),
+    sector: findDistrictName(landmark.x, landmark.y).toUpperCase(),
+  };
+}
+
+function nearestLandmark(maxDistance = Infinity) {
+  let best = null;
+
+  currentLayout().landmarks.forEach((landmark) => {
+    const metrics = landmarkMetrics(landmark);
+    if (metrics.distance > maxDistance) {
+      return;
+    }
+    if (!best || metrics.distance < best.distance) {
+      best = { landmark, ...metrics };
+    }
+  });
+
+  return best;
+}
+
+function discoverLandmark(landmark) {
+  if (state.discoveredLandmarks.has(landmark.id)) {
+    return;
+  }
+
+  state.discoveredLandmarks.add(landmark.id);
+  pushLog(`Landmark sighted: ${landmark.name}. ${landmark.desc}`);
 }
 
 function findActiveChannel() {
@@ -1142,7 +1533,7 @@ function playCandidateUrl(audio, url, timeoutMs) {
   });
 }
 
-async function playChannelAudio(channel) {
+async function playChannelAudio(channel, source = "zone") {
   if (!state.audioEnabled || state.audioLockedReason || !channel || !channel.audio) {
     return;
   }
@@ -1166,11 +1557,13 @@ async function playChannelAudio(channel) {
 
       runtime.lastGoodUrl = url;
       state.currentAudio = runtime.audio;
+      state.playbackSource = source;
       renderAudioControls();
 
       const sourceLabel = url === channel.audio.primaryUrl ? "primary" : "fallback";
       setNowPlaying(channel.name);
       setAudioStatus(`live (${sourceLabel})`);
+      renderWalkmanDeck();
       return;
     } catch (error) {
       if (playToken !== state.playToken) {
@@ -1184,6 +1577,7 @@ async function playChannelAudio(channel) {
           state.audioBlockedWarned = true;
           pushLog('Audio blocked by browser policy. Use "Enable Audio" after page interaction.');
         }
+        renderWalkmanDeck();
         return;
       }
     }
@@ -1196,6 +1590,7 @@ async function playChannelAudio(channel) {
   setNowPlaying("(missing audio)");
   setAudioStatus("error");
   pushLog(`Audio failed for ${channel.name}. Check primary/fallback URLs in channels.json.`);
+  renderWalkmanDeck();
 }
 
 function enableAudio(shouldEnable) {
@@ -1222,18 +1617,72 @@ function enableAudio(shouldEnable) {
   state.audioEnabled = true;
   setAudioStatus("armed");
   renderAudioControls();
-  pushLog("Audio armed. Move through the city to hear transmissions.");
+  pushLog("Audio armed. Walkman tapes and live transmissions are now available.");
 
-  const active = getChannelById(state.activeChannelId);
-  if (active && active.audio) {
-    playChannelAudio(active);
-  } else if (active) {
-    setNowPlaying("(quiet zone)");
+  const walkmanChannel = activeWalkmanChannel();
+  if (walkmanChannel) {
+    playChannelAudio(walkmanChannel, "walkman");
   } else {
-    setNowPlaying("(standby)");
+    const active = getChannelById(state.activeChannelId);
+    if (active && active.audio) {
+      playChannelAudio(active, "zone");
+    } else if (active) {
+      setNowPlaying("(quiet zone)");
+    } else {
+      setNowPlaying("(standby)");
+    }
   }
 
+  renderWalkmanDeck();
   return true;
+}
+
+function playWalkmanTape(channelId) {
+  const channel = getChannelById(channelId);
+  if (!channel || !channel.audio || !state.collectedTapeIds.has(channel.id)) {
+    return;
+  }
+
+  if (state.walkmanChannelId === channel.id && isWalkmanPlaybackActive()) {
+    cancelPendingAudio();
+    stopCurrentAudio();
+    setAudioStatus(state.audioEnabled ? "armed" : "idle");
+    setNowPlaying(state.audioEnabled ? "(walkman paused)" : "(muted)");
+    pushLog(`Walkman paused: ${channel.name}.`);
+    renderWalkmanDeck();
+    return;
+  }
+
+  state.walkmanChannelId = channel.id;
+  pushLog(`Walkman loaded: ${channel.name}.`);
+
+  if (!state.audioEnabled) {
+    setNowPlaying(`${channel.name} (walkman loaded)`);
+    setAudioStatus(state.audioLockedReason ? `disabled (${state.audioLockedReason})` : "idle");
+    renderWalkmanDeck();
+    return;
+  }
+
+  if (state.audioLockedReason) {
+    setNowPlaying("(unavailable)");
+    setAudioStatus(`disabled (${state.audioLockedReason})`);
+    renderWalkmanDeck();
+    return;
+  }
+
+  playChannelAudio(channel, "walkman").finally(() => {
+    renderWalkmanDeck();
+  });
+}
+
+function collectTape(channel) {
+  if (!channel.audio || state.collectedTapeIds.has(channel.id)) {
+    return;
+  }
+
+  state.collectedTapeIds.add(channel.id);
+  pushLog(`Tape acquired: ${channel.name}. Added to Walkman deck.`);
+  renderWalkmanDeck();
 }
 
 function setActiveChannel(channelId) {
@@ -1241,6 +1690,26 @@ function setActiveChannel(channelId) {
   renderChannels();
 
   const active = getChannelById(channelId);
+  const walkmanChannel = activeWalkmanChannel();
+  if (walkmanChannel) {
+    if (state.audioLockedReason) {
+      setNowPlaying("(unavailable)");
+      setAudioStatus(`disabled (${state.audioLockedReason})`);
+      return;
+    }
+
+    if (!state.audioEnabled) {
+      setNowPlaying(`${walkmanChannel.name} (walkman loaded)`);
+      setAudioStatus("idle");
+      return;
+    }
+
+    if (!isWalkmanPlaybackActive()) {
+      playChannelAudio(walkmanChannel, "walkman");
+    }
+    return;
+  }
+
   if (!active) {
     cancelPendingAudio();
     stopCurrentAudio();
@@ -1273,13 +1742,15 @@ function setActiveChannel(channelId) {
     return;
   }
 
-  playChannelAudio(active);
+  playChannelAudio(active, "zone");
 }
 
 function unlock(channel) {
   state.unlocked.add(channel.id);
   pushLog(`Signal unlocked: ${channel.name}. ${channel.desc}`);
+  collectTape(channel);
   renderChannels();
+  renderWalkmanDeck();
 }
 
 function describeDirection(dx, dy) {
@@ -1343,6 +1814,7 @@ function updateSignalDossier(activeChannel) {
   const trackedChannel = getTrackedChannel();
   const focusChannel = activeChannel || trackedChannel;
   const isActiveFocus = Boolean(activeChannel);
+  const landmarkInfo = nearestLandmark(2.6);
   const audioLine = state.audioLockedReason
     ? `AUDIO: UNAVAILABLE (${state.audioLockedReason.toUpperCase()})`
     : `AUDIO: ${state.audioEnabled ? state.audioStatus.toUpperCase() : "MUTED"}`;
@@ -1351,11 +1823,20 @@ function updateSignalDossier(activeChannel) {
   dossierMetaPrimaryEl.textContent = `SECTOR: ${sector} // COORDS: ${coords}`;
 
   if (!focusChannel) {
+    if (landmarkInfo) {
+      dossierStateEl.textContent = state.discoveredLandmarks.has(landmarkInfo.landmark.id) ? "LANDMARK SIGHTED" : "VISUAL CONTACT";
+      dossierNameEl.textContent = landmarkInfo.landmark.name;
+      dossierDescEl.textContent = landmarkInfo.landmark.desc;
+      dossierMetaSecondaryEl.textContent = `${audioLine} // LANDMARK: ${landmarkInfo.landmark.shortLabel} ${landmarkInfo.distance.toFixed(1)} TILES ${landmarkInfo.direction}`;
+      dossierCreditEl.textContent = `REGION: ${landmarkInfo.sector} // BAY ICON DISCOVERY ${state.discoveredLandmarks.size}/${layout.landmarks.length}`;
+      return;
+    }
+
     dossierStateEl.textContent = "ROAMING STATIC";
     dossierNameEl.textContent = layout.name;
     dossierDescEl.textContent = layout.copy.subtitle;
     dossierMetaSecondaryEl.textContent = `${audioLine} // SCAN MODE: WRAP WORLD`;
-    dossierCreditEl.textContent = "CREDITS: Move onto a signal marker to reveal station details.";
+    dossierCreditEl.textContent = `CREDITS: Move onto a signal marker or landmark icon to reveal more of the bay. ICONS ${state.discoveredLandmarks.size}/${layout.landmarks.length}`;
     return;
   }
 
@@ -1378,14 +1859,16 @@ function updateSignalDossier(activeChannel) {
     dossierMetaSecondaryEl.textContent = isActiveFocus
       ? `${audioLine} // SIGNAL TYPE: QUIET ZONE`
       : `TRACK: ${metrics.distance.toFixed(1)} TILES ${metrics.direction} // TARGET: QUIET ZONE`;
-    dossierCreditEl.textContent = "CREDITS: Off-air community relay point.";
+    dossierCreditEl.textContent = landmarkInfo ? `LANDMARK: ${landmarkInfo.landmark.name}` : "CREDITS: Off-air community relay point.";
     return;
   }
 
   dossierMetaSecondaryEl.textContent = isActiveFocus
     ? `${audioLine} // LENGTH: ${formatDuration(focusChannel.audio.durationSec)}`
     : `TRACK: ${metrics.distance.toFixed(1)} TILES ${metrics.direction} // LENGTH: ${formatDuration(focusChannel.audio.durationSec)}`;
-  dossierCreditEl.textContent = `CREDITS: ${focusChannel.audio.attribution} // ${focusChannel.audio.license}`;
+  dossierCreditEl.textContent = landmarkInfo
+    ? `CREDITS: ${focusChannel.audio.attribution} // NEAR ${landmarkInfo.landmark.name}`
+    : `CREDITS: ${focusChannel.audio.attribution} // ${focusChannel.audio.license}`;
 }
 
 function renderChannels() {
@@ -1443,8 +1926,14 @@ function findDistrictName(x, y) {
 
 function updateReadout(channel) {
   const layout = currentLayout();
+  const landmarkInfo = nearestLandmark(4.8);
   coordsEl.textContent = `POS ${wrapCoord(state.x, layout.mapWidth).toFixed(1)}, ${wrapCoord(state.y, layout.mapHeight).toFixed(1)}`;
   sectorEl.textContent = `SECTOR: ${findDistrictName(state.x, state.y).toUpperCase()}`;
+  landmarkEl.textContent = landmarkInfo
+    ? landmarkInfo.distance <= 1.4
+      ? `LANDMARK: ${landmarkInfo.landmark.name.toUpperCase()}`
+      : `LANDMARK: ${landmarkInfo.landmark.shortLabel} ${landmarkInfo.distance.toFixed(1)} ${landmarkInfo.direction}`
+    : "LANDMARK: SCANNING";
   updateSignalDossier(channel);
   const trackedChannel = getTrackedChannel();
 
@@ -1523,72 +2012,199 @@ function isVisible(px, py, width = TILE_SIZE, height = TILE_SIZE) {
   return px < canvas.width + width && py < canvas.height + height && px > -width && py > -height;
 }
 
+function adjacentTileCount(x, y, targetTiles, layout = currentLayout()) {
+  let count = 0;
+
+  for (let offsetY = -1; offsetY <= 1; offsetY += 1) {
+    for (let offsetX = -1; offsetX <= 1; offsetX += 1) {
+      if (offsetX === 0 && offsetY === 0) {
+        continue;
+      }
+
+      if (targetTiles.includes(mapTile(x + offsetX, y + offsetY, layout))) {
+        count += 1;
+      }
+    }
+  }
+
+  return count;
+}
+
 function drawRoadTile(px, py, x, y) {
+  const layout = currentLayout();
+  const urbanity = adjacentTileCount(x, y, ["B", "=", "P"], layout);
+  const nearWater = adjacentTileCount(x, y, ["S", "~"], layout);
+  const nearHills = adjacentTileCount(x, y, ["H"], layout);
+  const pulse = Math.floor((state.tick * 8 + x * 5 + y * 3) % 14);
+
+  const downtownBand =
+    x >= Math.floor(layout.mapWidth * 0.25) &&
+    x <= Math.floor(layout.mapWidth * 0.76) &&
+    y >= Math.floor(layout.mapHeight * 0.16) &&
+    y <= Math.floor(layout.mapHeight * 0.66);
+  const urbanCore = urbanity >= 2 || (downtownBand && nearWater >= 2);
+  const dryUpland = nearHills >= 2 || y >= Math.floor(layout.mapHeight * 0.62);
+
+  if (urbanCore) {
+    ctx.fillStyle = (x + y) % 2 ? paletteValue("cityDark") : paletteValue("cityLight");
+    ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
+    ctx.fillStyle = paletteValue("buildingFace");
+    ctx.fillRect(px + 3, py + 3, TILE_SIZE - 6, TILE_SIZE - 6);
+    ctx.fillStyle = paletteValue("cityLine");
+    ctx.fillRect(px + 4, py + 15, TILE_SIZE - 8, 2);
+    ctx.fillRect(px + 15, py + 4, 2, TILE_SIZE - 8);
+    ctx.fillRect(px + 7 + pulse, py + 8, 4, 2);
+    ctx.fillRect(px + 17, py + 20, 5, 2);
+    return;
+  }
+
+  if (dryUpland) {
+    ctx.fillStyle = (x + y) % 2 ? paletteValue("soilDark") : paletteValue("soilLight");
+    ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
+    ctx.fillStyle = paletteValue("coastBright");
+    ctx.fillRect(px + 4, py + 8, TILE_SIZE - 8, 3);
+    ctx.fillRect(px + 8, py + 18, TILE_SIZE - 14, 2);
+    ctx.fillStyle = paletteValue("treeDark");
+    ctx.fillRect(px + 6, py + 13, 3, 3);
+    ctx.fillRect(px + 19, py + 10, 3, 3);
+    ctx.fillStyle = paletteValue("treeLight");
+    ctx.fillRect(px + 7, py + 12, 2, 1);
+    ctx.fillRect(px + 20, py + 9, 2, 1);
+    return;
+  }
+
   ctx.fillStyle = (x + y) % 2 ? paletteValue("roadDark") : paletteValue("roadLight");
   ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
   ctx.fillStyle = paletteValue("roadInset");
-  ctx.fillRect(px + 2, py + 2, TILE_SIZE - 4, TILE_SIZE - 4);
-  const pulse = Math.floor((state.tick * 8 + x * 5 + y * 3) % 14);
-  ctx.fillStyle = paletteValue("roadGlow");
-  if ((x + y) % 2) {
-    ctx.fillRect(px + 6, py + 8, TILE_SIZE - 12, 2);
-    ctx.fillRect(px + 10, py + 18, TILE_SIZE - 20, 2);
-    ctx.fillRect(px + 7 + pulse, py + 8, 4, 2);
-  } else {
-    ctx.fillRect(px + 8, py + 6, 2, TILE_SIZE - 12);
-    ctx.fillRect(px + 18, py + 10, 2, TILE_SIZE - 20);
-    ctx.fillRect(px + 8, py + 7 + pulse, 2, 4);
-  }
+  ctx.fillRect(px + 4, py + 6, TILE_SIZE - 8, TILE_SIZE - 12);
+  ctx.fillStyle = paletteValue("treeDark");
+  ctx.fillRect(px + 6, py + 7, 3, 3);
+  ctx.fillRect(px + 21, py + 10, 4, 3);
+  ctx.fillRect(px + 12, py + 20, 3, 3);
+  ctx.fillStyle = paletteValue("treeLight");
+  ctx.fillRect(px + 7, py + 8, 2, 1);
+  ctx.fillRect(px + 22, py + 11, 2, 1);
+  ctx.fillRect(px + 13, py + 21, 2, 1);
   ctx.fillStyle = paletteValue("roadLine");
-  ctx.fillRect(px + 22, py + 8, 3, 3);
-  ctx.fillRect(px + 10, py + 21, 3, 3);
+  if ((x + y) % 2) {
+    ctx.fillRect(px + 9, py + 14, 13, 2);
+    ctx.fillRect(px + 12 + (pulse % 5), py + 14, 3, 2);
+  } else {
+    ctx.fillRect(px + 14, py + 8, 2, 13);
+    ctx.fillRect(px + 14, py + 11 + (pulse % 5), 2, 3);
+  }
 }
 
 function drawShallowTile(px, py, x, y) {
+  const layout = currentLayout();
+  const sway = Math.sin(state.tick * 4.5 + x * 0.9 + y * 0.7) * 2;
+  const marshy = y >= layout.mapHeight * 0.68 || adjacentTileCount(x, y, [".", "P", "H", "B"], layout) >= 4;
   ctx.fillStyle = (x + y) % 2 ? paletteValue("shoalDark") : paletteValue("shoalLight");
   ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
+  ctx.fillStyle = paletteValue("coastBright");
+  ctx.fillRect(px + 3, py + 4, TILE_SIZE - 6, 5);
   ctx.fillStyle = paletteValue("waterGlow");
-  ctx.fillRect(px + 2, py + 4, TILE_SIZE - 4, 2);
-  ctx.fillRect(px + 5, py + 14, TILE_SIZE - 10, 2);
+  ctx.fillRect(px + 4, py + 12, TILE_SIZE - 8, 2);
+  ctx.fillRect(px + 7, py + 21, TILE_SIZE - 14, 2);
   ctx.fillStyle = paletteValue("shoalGlow");
   ctx.fillRect(px + 6, py + 8, 4, 4);
-  ctx.fillRect(px + 18, py + 19, 6, 2);
+  ctx.fillRect(px + 18, py + 18, 6, 3);
+
+  if (marshy) {
+    ctx.fillStyle = paletteValue("reedDark");
+    ctx.fillRect(px + 8 + Math.round(sway), py + 16, 1, 8);
+    ctx.fillRect(px + 14 - Math.round(sway / 2), py + 15, 1, 9);
+    ctx.fillRect(px + 20 + Math.round(sway / 3), py + 17, 1, 7);
+    ctx.fillStyle = paletteValue("reedLight");
+    ctx.fillRect(px + 7 + Math.round(sway), py + 15, 3, 2);
+    ctx.fillRect(px + 13 - Math.round(sway / 2), py + 14, 3, 2);
+    ctx.fillRect(px + 19 + Math.round(sway / 3), py + 16, 3, 2);
+  }
 }
 
 function drawWaterTile(px, py, x, y) {
   ctx.fillStyle = paletteValue("waterDark");
   ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
-  ctx.fillStyle = (x + y) % 2 ? paletteValue("waterLight") : paletteValue("roadInset");
+  ctx.fillStyle = (x + y) % 2 ? paletteValue("waterLight") : paletteValue("shoalDark");
   ctx.fillRect(px + 1, py + 1, TILE_SIZE - 2, TILE_SIZE - 2);
   const waveOffset = Math.floor((state.tick * 12 + x * 5 + y * 3) % 16);
   ctx.fillStyle = paletteValue("waterGlow");
   ctx.fillRect(px + 4, py + 7 + (waveOffset % 3), 10, 2);
   ctx.fillRect(px + 16, py + 18 - (waveOffset % 3), 8, 2);
+  ctx.fillStyle = paletteValue("waterSpark");
+  ctx.fillRect(px + 7 + (waveOffset % 6), py + 10, 2, 2);
+  ctx.fillRect(px + 18 - (waveOffset % 5), py + 22, 2, 2);
 }
 
 function drawBridgeTile(px, py, x, y) {
-  ctx.fillStyle = paletteValue("bridgeBase");
+  const layout = currentLayout();
+  const north = mapTile(x, y - 1, layout) === "=";
+  const south = mapTile(x, y + 1, layout) === "=";
+  const west = mapTile(x - 1, y, layout) === "=";
+  const east = mapTile(x + 1, y, layout) === "=";
+  const vertical = (north || south) && !(west || east);
+  const goldenGate = getLandmarkById("golden-gate", layout);
+  const nearGoldenGate = Boolean(goldenGate)
+    && Math.abs(shortestWrappedDelta(x + 0.5, goldenGate.x, layout.mapWidth)) <= 1.3
+    && Math.abs(shortestWrappedDelta(y + 0.5, goldenGate.y, layout.mapHeight)) <= 2.8;
+  const bridgeBaseColor = nearGoldenGate ? "#93483a" : paletteValue("bridgeBase");
+  const bridgeDeckColor = nearGoldenGate ? "#c55e49" : paletteValue("bridgeDeck");
+  const bridgeRailColor = nearGoldenGate ? "#ff6b5d" : paletteValue("bridgeRail");
+  const bridgeLightColor = nearGoldenGate ? "#ffd8cd" : paletteValue("bridgeLight");
+
+  ctx.fillStyle = bridgeBaseColor;
   ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
-  ctx.fillStyle = paletteValue("bridgeDeck");
-  ctx.fillRect(px + 2, py + 4, TILE_SIZE - 4, TILE_SIZE - 8);
-  ctx.fillStyle = paletteValue("bridgeRail");
-  ctx.fillRect(px, py + 4, TILE_SIZE, 2);
-  ctx.fillRect(px, py + TILE_SIZE - 6, TILE_SIZE, 2);
+  ctx.fillStyle = bridgeDeckColor;
+  if (vertical) {
+    ctx.fillRect(px + 4, py + 2, TILE_SIZE - 8, TILE_SIZE - 4);
+  } else {
+    ctx.fillRect(px + 2, py + 4, TILE_SIZE - 4, TILE_SIZE - 8);
+  }
+  ctx.fillStyle = bridgeRailColor;
+  if (vertical) {
+    ctx.fillRect(px + 4, py, 2, TILE_SIZE);
+    ctx.fillRect(px + TILE_SIZE - 6, py, 2, TILE_SIZE);
+    ctx.fillRect(px + 8, py + 6, 8, 1);
+    ctx.fillRect(px + 9, py + 5, 6, 1);
+    ctx.fillRect(px + 8, py + 18, 8, 1);
+    ctx.fillRect(px + 9, py + 19, 6, 1);
+    if (nearGoldenGate) {
+      ctx.fillRect(px + 10, py + 3, 2, 3);
+      ctx.fillRect(px + 20, py + 3, 2, 3);
+      ctx.fillRect(px + 10, py + 23, 2, 3);
+      ctx.fillRect(px + 20, py + 23, 2, 3);
+    }
+  } else {
+    ctx.fillRect(px, py + 4, TILE_SIZE, 2);
+    ctx.fillRect(px, py + TILE_SIZE - 6, TILE_SIZE, 2);
+  }
   const light = Math.floor((state.tick * 10 + x * 4 + y * 2) % TILE_SIZE);
-  ctx.fillStyle = paletteValue("bridgeLight");
-  ctx.fillRect(px + light, py + 14, 5, 3);
+  ctx.fillStyle = bridgeLightColor;
+  if (vertical) {
+    ctx.fillRect(px + 14, py + light, 3, 5);
+  } else {
+    ctx.fillRect(px + light, py + 14, 5, 3);
+  }
 }
 
 function drawHillTile(px, py, x, y) {
-  ctx.fillStyle = paletteValue("hillBase");
+  ctx.fillStyle = paletteValue("soilDark");
   ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
-  ctx.fillStyle = paletteValue("hillShade");
+  ctx.fillStyle = paletteValue("hillBase");
   ctx.fillRect(px + 2, py + 8, TILE_SIZE - 4, TILE_SIZE - 10);
-  ctx.fillRect(px + 6, py + 3, TILE_SIZE - 12, 8);
+  ctx.fillRect(px + 6, py + 3, TILE_SIZE - 12, 7);
+  ctx.fillStyle = paletteValue("hillShade");
+  ctx.fillRect(px + 4, py + 13, TILE_SIZE - 8, 4);
   ctx.fillStyle = paletteValue("hillGlow");
   ctx.fillRect(px + 7, py + 6, 10, 2);
   ctx.fillRect(px + 14, py + 15, 7, 2);
   ctx.fillRect(px + 10, py + 22, 9, 2);
+  ctx.fillStyle = paletteValue("treeDark");
+  ctx.fillRect(px + 6, py + 18, 3, 3);
+  ctx.fillRect(px + 20, py + 12, 3, 3);
+  ctx.fillStyle = paletteValue("treeLight");
+  ctx.fillRect(px + 7, py + 17, 2, 1);
+  ctx.fillRect(px + 21, py + 11, 2, 1);
 }
 
 function drawCoastOutline(px, py, x, y, tile) {
@@ -1623,23 +2239,198 @@ function drawCoastOutline(px, py, x, y, tile) {
 function drawBuildingTile(px, py, x, y) {
   ctx.fillStyle = paletteValue("buildingBase");
   ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
-  ctx.fillStyle = paletteValue("buildingFace");
-  ctx.fillRect(px + 3, py + 3, TILE_SIZE - 6, TILE_SIZE - 6);
+  ctx.fillStyle = (x + y) % 2 ? paletteValue("buildingFace") : paletteValue("cityLight");
+  ctx.fillRect(px + 3, py + 4, TILE_SIZE - 6, TILE_SIZE - 7);
   const pulse = Math.floor(state.tick * 4 + x + y) % 3;
   const windowColor = pulse === 0 ? paletteValue("buildingWindowA") : pulse === 1 ? paletteValue("buildingWindowB") : paletteValue("buildingWindowC");
   ctx.fillStyle = windowColor;
   ctx.fillRect(px + 7, py + 7, 4, 4);
   ctx.fillRect(px + 14, py + 12, 4, 4);
   ctx.fillRect(px + 10, py + 19, 4, 4);
+  ctx.fillStyle = paletteValue("cityLine");
+  ctx.fillRect(px + 12, py + 4, 6, 2);
+  ctx.fillRect(px + 4, py + 3, TILE_SIZE - 8, 1);
 }
 
 function drawPlazaTile(px, py, x, y) {
   drawRoadTile(px, py, x, y);
   ctx.fillStyle = paletteValue("plazaGlow");
   ctx.fillRect(px + 5, py + 5, TILE_SIZE - 10, TILE_SIZE - 10);
-  ctx.fillStyle = "#7dffbb";
+  ctx.fillStyle = paletteValue("roadLine");
   ctx.fillRect(px + 14, py + 6, 4, TILE_SIZE - 12);
   ctx.fillRect(px + 6, py + 14, TILE_SIZE - 12, 4);
+}
+
+function drawFogCluster(worldX, worldY, widthTiles, heightTiles, driftPhase) {
+  const px = Math.round(worldToScreen(worldX + Math.sin(state.tick * 0.08 + driftPhase) * 1.6, worldY + Math.cos(state.tick * 0.05 + driftPhase) * 0.45).x);
+  const py = Math.round(worldToScreen(worldX, worldY).y);
+  const width = Math.round(widthTiles * TILE_SIZE);
+  const height = Math.round(heightTiles * TILE_SIZE);
+
+  if (!isVisible(px - width / 2, py - height / 2, width, height)) {
+    return;
+  }
+
+  ctx.fillStyle = paletteValue("fogShadow");
+  ctx.fillRect(px - width / 2, py - height / 4, width, height / 2);
+  ctx.fillRect(px - width * 0.35, py - height / 2, width * 0.45, height / 2);
+  ctx.fillRect(px - width * 0.1, py - height * 0.58, width * 0.42, height / 2);
+  ctx.fillStyle = paletteValue("fogLight");
+  ctx.fillRect(px - width * 0.42, py - height * 0.18, width * 0.84, height * 0.3);
+  ctx.fillRect(px - width * 0.22, py - height * 0.45, width * 0.4, height * 0.24);
+}
+
+function drawFogBanks() {
+  const goldenGate = getLandmarkById("golden-gate");
+  const saltPonds = getLandmarkById("salt-ponds");
+
+  if (goldenGate) {
+    drawFogCluster(goldenGate.x - 2.4, goldenGate.y + 1.5, 6.8, 2.4, 0.2);
+    drawFogCluster(goldenGate.x + 5.2, goldenGate.y + 3.6, 5.2, 2.1, 1.4);
+  }
+
+  if (saltPonds) {
+    drawFogCluster(saltPonds.x - 4.6, saltPonds.y - 1.2, 7.6, 2.5, 2.6);
+  }
+}
+
+function drawBird(px, py) {
+  ctx.fillRect(px, py, 3, 1);
+  ctx.fillRect(px + 4, py, 3, 1);
+  ctx.fillRect(px + 2, py + 1, 1, 1);
+  ctx.fillRect(px + 4, py + 1, 1, 1);
+}
+
+function drawBirdFlocks() {
+  const anchors = [
+    { landmarkId: "golden-gate", spanX: 5.8, spanY: 1.4, speed: 0.38 },
+    { landmarkId: "port-oakland", spanX: 4.4, spanY: 1.1, speed: 0.32 },
+    { landmarkId: "salt-ponds", spanX: 6.2, spanY: 1.5, speed: 0.28 },
+  ];
+
+  ctx.save();
+  ctx.fillStyle = paletteValue("birdDark");
+
+  anchors.forEach((anchor, anchorIndex) => {
+    const landmark = getLandmarkById(anchor.landmarkId);
+    if (!landmark) {
+      return;
+    }
+
+    for (let birdIndex = 0; birdIndex < 4; birdIndex += 1) {
+      const phase = state.tick * anchor.speed + anchorIndex * 3 + birdIndex * 0.85;
+      const worldX = landmark.x + Math.sin(phase) * anchor.spanX;
+      const worldY = landmark.y - 1.7 + Math.cos(phase * 1.7) * anchor.spanY;
+      const screen = worldToScreen(worldX, worldY);
+      const px = Math.round(screen.x);
+      const py = Math.round(screen.y);
+
+      if (!isVisible(px, py, 7, 2)) {
+        continue;
+      }
+
+      drawBird(px, py);
+    }
+  });
+
+  ctx.restore();
+}
+
+function drawLandmarkIcon(landmark, px, py) {
+  const blink = Math.floor(state.tick * 6) % 2 === 0;
+  ctx.fillStyle = landmark.color;
+
+  if (landmark.kind === "bridge") {
+    if (landmark.axis === "vertical") {
+      ctx.fillRect(px + 11, py + 1, 2, 22);
+      ctx.fillRect(px + 6, py + 4, 3, 16);
+      ctx.fillRect(px + 15, py + 4, 3, 16);
+      ctx.fillRect(px + 8, py + 7, 8, 1);
+      ctx.fillRect(px + 9, py + 6, 6, 1);
+      ctx.fillRect(px + 8, py + 15, 8, 1);
+      ctx.fillRect(px + 9, py + 16, 6, 1);
+      ctx.fillStyle = "#ffd3cc";
+      ctx.fillRect(px + 11, py + 8, 2, 2);
+      ctx.fillRect(px + 11, py + 17, 2, 2);
+      ctx.fillStyle = landmark.color;
+    } else {
+      ctx.fillRect(px + 2, py + 14, 20, 2);
+      ctx.fillRect(px + 5, py + 7, 3, 8);
+      ctx.fillRect(px + 16, py + 7, 3, 8);
+      ctx.fillRect(px + 8, py + 10, 1, 4);
+      ctx.fillRect(px + 15, py + 10, 1, 4);
+    }
+  } else if (landmark.kind === "tower") {
+    ctx.fillRect(px + 9, py + 3, 6, 15);
+    ctx.fillRect(px + 8, py + 2, 8, 2);
+    if (blink) ctx.fillRect(px + 11, py, 2, 2);
+  } else if (landmark.kind === "radio") {
+    ctx.fillRect(px + 11, py + 4, 2, 13);
+    ctx.fillRect(px + 7, py + 9, 10, 1);
+    ctx.fillRect(px + 8, py + 13, 8, 1);
+    if (blink) {
+      ctx.fillRect(px + 6, py + 6, 2, 2);
+      ctx.fillRect(px + 16, py + 6, 2, 2);
+    }
+  } else if (landmark.kind === "port") {
+    ctx.fillRect(px + 4, py + 14, 16, 2);
+    ctx.fillRect(px + 6, py + 7, 2, 7);
+    ctx.fillRect(px + 14, py + 6, 2, 8);
+    ctx.fillRect(px + 8, py + 7, 7, 2);
+    ctx.fillRect(px + 16, py + 6, 5, 2);
+  } else if (landmark.kind === "grove") {
+    ctx.fillRect(px + 7, py + 8, 4, 4);
+    ctx.fillRect(px + 12, py + 5, 5, 5);
+    ctx.fillRect(px + 16, py + 9, 4, 4);
+    ctx.fillRect(px + 9, py + 12, 2, 5);
+    ctx.fillRect(px + 14, py + 10, 2, 7);
+    ctx.fillRect(px + 18, py + 13, 2, 4);
+  } else if (landmark.kind === "pond") {
+    ctx.fillRect(px + 5, py + 12, 12, 5);
+    ctx.fillRect(px + 9, py + 9, 8, 4);
+    ctx.fillStyle = paletteValue("coastBright");
+    ctx.fillRect(px + 8, py + 10, 9, 2);
+    ctx.fillStyle = landmark.color;
+  } else if (landmark.kind === "island") {
+    ctx.fillRect(px + 6, py + 13, 12, 4);
+    ctx.fillStyle = paletteValue("buildingFace");
+    ctx.fillRect(px + 10, py + 8, 5, 5);
+    ctx.fillStyle = landmark.color;
+  } else {
+    ctx.fillRect(px + 9, py + 7, 6, 6);
+  }
+}
+
+function drawLandmarks() {
+  const nearby = nearestLandmark(2.6);
+
+  ctx.save();
+  ctx.font = "7px 'Press Start 2P Local', monospace";
+  ctx.textBaseline = "top";
+
+  currentLayout().landmarks.forEach((landmark) => {
+    const screen = worldToScreen(landmark.x, landmark.y);
+    const px = Math.round(screen.x) - 12;
+    const py = Math.round(screen.y) - 18;
+    const highlight = nearby && nearby.landmark.id === landmark.id;
+    const discovered = state.discoveredLandmarks.has(landmark.id);
+    const width = landmark.shortLabel.length * 5 + 8;
+
+    if (!isVisible(px, py, 24, 26)) {
+      return;
+    }
+
+    ctx.fillStyle = paletteValue("landmarkOutline");
+    ctx.fillRect(px + 1, py + 7, 22, 12);
+    drawLandmarkIcon(landmark, px, py + 2);
+
+    ctx.fillStyle = "rgba(15, 35, 53, 0.82)";
+    ctx.fillRect(px - 1, py - 2, width, 9);
+    ctx.fillStyle = highlight || discovered ? landmark.color : "#f6f7ff";
+    ctx.fillText(landmark.shortLabel, px + 2, py);
+  });
+
+  ctx.restore();
 }
 
 function drawMap() {
@@ -1680,6 +2471,34 @@ function drawMap() {
       }
     }
   }
+}
+
+function drawAerialOverlay() {
+  const layout = currentLayout();
+  const overlay = layout.aerialOverlay;
+  const image = state.aerialOverlayImage;
+  if (!overlay || !image || !image.complete || !image.naturalWidth || !image.naturalHeight) {
+    return;
+  }
+
+  const worldWidthPx = layout.mapWidth * TILE_SIZE;
+  const worldHeightPx = layout.mapHeight * TILE_SIZE;
+  const worldLeft = (state.cameraX - layout.viewport.width / 2) * TILE_SIZE;
+  const worldTop = (state.cameraY - layout.viewport.height / 2) * TILE_SIZE;
+  const wrappedOffsetX = ((worldLeft % worldWidthPx) + worldWidthPx) % worldWidthPx;
+  const wrappedOffsetY = ((worldTop % worldHeightPx) + worldHeightPx) % worldHeightPx;
+
+  ctx.save();
+  ctx.globalAlpha = overlay.opacity;
+  ctx.globalCompositeOperation = overlay.blendMode;
+
+  for (let drawY = -wrappedOffsetY; drawY < canvas.height; drawY += worldHeightPx) {
+    for (let drawX = -wrappedOffsetX; drawX < canvas.width; drawX += worldWidthPx) {
+      ctx.drawImage(image, drawX, drawY, worldWidthPx, worldHeightPx);
+    }
+  }
+
+  ctx.restore();
 }
 
 function drawTraffic() {
@@ -1823,6 +2642,16 @@ function drawRadar() {
   radarCtx.lineWidth = 1;
   radarCtx.strokeRect(0.5, 0.5, radarCanvas.width - 1, radarCanvas.height - 1);
 
+  layout.landmarks.forEach((landmark) => {
+    const px = Math.round(landmark.x * scale);
+    const py = Math.round(landmark.y * scale);
+    radarCtx.fillStyle = landmark.color;
+    radarCtx.fillRect(px, py, Math.max(2, scale - 1), Math.max(2, scale - 1));
+    radarCtx.strokeStyle = "rgba(15, 35, 53, 0.9)";
+    radarCtx.lineWidth = 1;
+    radarCtx.strokeRect(px - 0.5, py - 0.5, Math.max(2, scale - 1) + 1, Math.max(2, scale - 1) + 1);
+  });
+
   state.channels.forEach((channel) => {
     const isUnlocked = state.unlocked.has(channel.id);
     const isActive = state.activeChannelId === channel.id;
@@ -1863,7 +2692,11 @@ function drawRadar() {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawMap();
+  drawAerialOverlay();
   drawTraffic();
+  drawFogBanks();
+  drawLandmarks();
+  drawBirdFlocks();
   drawDistrictLabels();
   drawChannelMarkers();
   drawPlayer();
@@ -1889,6 +2722,11 @@ function loop(ts) {
 
   if (active && !state.unlocked.has(active.id)) {
     unlock(active);
+  }
+
+  const landmarkInfo = nearestLandmark(1.3);
+  if (landmarkInfo) {
+    discoverLandmark(landmarkInfo.landmark);
   }
 
   updateReadout(active);
@@ -1936,6 +2774,16 @@ listEl.addEventListener("click", (event) => {
   setTrackedChannel(button.dataset.channelId);
 });
 
+walkmanListEl.addEventListener("click", (event) => {
+  const target = event.target instanceof Element ? event.target : null;
+  const button = target ? target.closest(".walkman-button") : null;
+  if (!button) {
+    return;
+  }
+
+  playWalkmanTape(button.dataset.channelId);
+});
+
 enterWorldEl.addEventListener("click", () => {
   startWorld();
 });
@@ -1980,7 +2828,7 @@ async function init() {
   updateReadout(null);
   draw();
   state.bootReady = true;
-  attractCopyEl.textContent = "World boot complete. Enter the city, tap a signal to track it, and drag on the map to steer on mobile.";
+  attractCopyEl.textContent = "World boot complete. Enter the city, track pirate signals, and sweep landmark icons across a brighter, higher-detail Bay overworld.";
   setAttractStatus("READY TO TRANSMIT // PRESS ENTER OR TAP A BUTTON", true);
 }
 
