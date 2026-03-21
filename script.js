@@ -12,7 +12,7 @@ const DEFAULT_COPY = {
   tag: "NEON BLOCK BAY // PIRATE WALKMAN RUN",
   title: "NeoCities Pirate Radio: Neon Block Bay",
   subtitle: "Unlock tracks like pickups, fire sound bursts, and roam an iconic cyberpunk Bay rendered as chunky block terrain.",
-  help: "Keyboard: Arrow Keys or WASD move, Space fires a sound burst, X stops the current tape, and signal pickups add tracks to the Walkman Deck instead of auto-playing. Touch: tap Burst to fire on mobile.",
+  help: "Keyboard: Arrow Keys or WASD move, Space fires a sound burst, X stops the current tape, and signal pickups add tracks to the Walkman Deck instead of auto-playing. Touch: drag on the map and use the action buttons on mobile.",
 };
 
 const DEFAULT_PALETTE = {
@@ -351,8 +351,7 @@ const dossierMetaSecondaryEl = document.getElementById("dossier-meta-secondary")
 const dossierCreditEl = document.getElementById("dossier-credit");
 const walkmanCountEl = document.getElementById("walkman-count");
 const walkmanCopyEl = document.getElementById("walkman-copy");
-const walkmanDisplayStatusEl = document.getElementById("walkman-display-status");
-const walkmanDisplayTrackEl = document.getElementById("walkman-display-track");
+const walkmanDisplayWindowEl = document.querySelector(".walkman-display-window");
 const walkmanListEl = document.getElementById("walkman-list");
 const walkmanPauseEl = document.getElementById("walkman-pause");
 const walkmanPlayEl = document.getElementById("walkman-play");
@@ -365,8 +364,6 @@ const enterWorldEl = document.getElementById("enter-world");
 const touchAudioStopEl = document.getElementById("touch-audio-stop");
 const touchClearTrackEl = document.getElementById("touch-clear-track");
 const touchBurstEl = document.getElementById("touch-burst");
-
-const touchButtons = [...document.querySelectorAll(".touch-pad button[data-key]")];
 
 const state = {
   layoutId: resolveRequestedLayoutId(),
@@ -604,27 +601,6 @@ window.addEventListener("keyup", (event) => {
   setDirectionalKey(state.keyboardKeys, event.key.toLowerCase(), false);
 });
 
-touchButtons.forEach((button) => {
-  const key = button.dataset.key;
-
-  const press = (event) => {
-    event.preventDefault();
-    button.classList.add("active");
-    setDirectionalKey(state.touchKeys, key, true);
-  };
-
-  const release = (event) => {
-    event.preventDefault();
-    button.classList.remove("active");
-    setDirectionalKey(state.touchKeys, key, false);
-  };
-
-  button.addEventListener("pointerdown", press);
-  button.addEventListener("pointerup", release);
-  button.addEventListener("pointercancel", release);
-  button.addEventListener("pointerleave", release);
-});
-
 canvas.addEventListener("pointerdown", (event) => {
   if (!state.worldStarted || event.pointerType === "mouse") {
     return;
@@ -667,16 +643,36 @@ function pushLog(message) {
 
 function setNowPlaying(label) {
   state.nowPlaying = label;
-  nowPlayingEl.textContent = `NOW PLAYING: ${label}`;
+  nowPlayingEl.textContent = `TRACK: ${label}`;
 }
 
 function setAudioStatus(status) {
   state.audioStatus = status;
-  audioStatusEl.textContent = `AUDIO STATUS: ${status}`;
+  audioStatusEl.textContent = `DECK: ${status.toUpperCase()}`;
+  renderWalkmanDisplayState();
 }
 
 function getNowPlaying() {
   return state.nowPlaying;
+}
+
+function renderWalkmanDisplayState() {
+  if (!walkmanDisplayWindowEl) {
+    return;
+  }
+
+  let displayState = "idle";
+  if (isWalkmanPlaybackActive()) {
+    displayState = "playing";
+  } else if (state.audioPaused) {
+    displayState = "paused";
+  } else if (state.audioStatus.startsWith("loading")) {
+    displayState = "loading";
+  } else if (activeWalkmanChannel()) {
+    displayState = "loaded";
+  }
+
+  walkmanDisplayWindowEl.dataset.audioState = displayState;
 }
 
 function formatDuration(totalSeconds) {
@@ -1538,34 +1534,24 @@ function isWalkmanPlaybackActive() {
 function renderWalkmanDeck() {
   const totalLive = state.channels.filter((channel) => Boolean(channel.audio)).length;
   const collected = collectedTapeChannels();
-  const selected = activeWalkmanChannel();
   walkmanCountEl.textContent = `SONG DEX ${collected.length}/${totalLive}`;
   walkmanListEl.innerHTML = "";
 
   if (collected.length === 0) {
     walkmanCopyEl.textContent = "Walk onto glowing music pickups to collect songs for the Walkman Song Dex.";
-    walkmanDisplayStatusEl.textContent = "CACHE EMPTY";
-    walkmanDisplayTrackEl.textContent = "COLLECT SONG PICKUPS TO BUILD YOUR DECK";
+    renderWalkmanDisplayState();
     renderAudioControls();
     return;
   }
 
-  if (selected && state.audioPaused) {
-    walkmanCopyEl.textContent = `${collected.length}/${totalLive} songs collected. Press Play to resume ${selected.name}.`;
-    walkmanDisplayStatusEl.textContent = "PAUSED";
-    walkmanDisplayTrackEl.textContent = `${selected.name} // ${formatDuration(selected.audio.durationSec)}`;
-  } else if (selected && isWalkmanPlaybackActive()) {
-    walkmanCopyEl.textContent = `${collected.length}/${totalLive} songs collected. ${selected.name} is spinning in the deck.`;
-    walkmanDisplayStatusEl.textContent = "PLAYING";
-    walkmanDisplayTrackEl.textContent = `${selected.name} // ${formatDuration(selected.audio.durationSec)}`;
-  } else if (selected) {
+  if (state.audioPaused && activeWalkmanChannel()) {
+    walkmanCopyEl.textContent = `${collected.length}/${totalLive} songs collected. Press Play to resume ${activeWalkmanChannel().name}.`;
+  } else if (isWalkmanPlaybackActive() && activeWalkmanChannel()) {
+    walkmanCopyEl.textContent = `${collected.length}/${totalLive} songs collected. ${activeWalkmanChannel().name} is spinning in the deck.`;
+  } else if (activeWalkmanChannel()) {
     walkmanCopyEl.textContent = `${collected.length}/${totalLive} songs collected. Press Play or pick another song from the deck.`;
-    walkmanDisplayStatusEl.textContent = "TAPE LOADED";
-    walkmanDisplayTrackEl.textContent = `${selected.name} // ${formatDuration(selected.audio.durationSec)}`;
   } else {
     walkmanCopyEl.textContent = `${collected.length}/${totalLive} songs collected. Choose a captured song from the Walkman deck.`;
-    walkmanDisplayStatusEl.textContent = "COLLECTION READY";
-    walkmanDisplayTrackEl.textContent = `${collected.length}/${totalLive} SONGS CAUGHT`;
   }
 
   collected.forEach((channel, index) => {
@@ -1607,6 +1593,7 @@ function renderWalkmanDeck() {
     walkmanListEl.appendChild(li);
   });
 
+  renderWalkmanDisplayState();
   renderAudioControls();
 }
 

@@ -51,7 +51,7 @@
         Traverse a compact low-bit Bay Area nightscape with chunky districts, sharper shorelines, and unlockable pirate pickups.
       </p>
       <p class="help" id="world-help">
-        Keyboard: Arrow Keys or WASD to move. Touch: hold the D-pad or drag on the map. Press Space to fire a burst, X to stop the current tape, tap a pickup row to track it, collect tapes on foot, and play from Walkman Deck.
+        Keyboard: Arrow Keys or WASD to move. Touch: drag on the map and use the action buttons. Press Space to fire a burst, X to stop the current tape, tap a pickup row to track it, collect tapes on foot, and play from Walkman Deck.
       </p>
     </header>
 
@@ -65,36 +65,63 @@
           aria-label="Low-bit cyberpunk Bay overworld with avatar, pickups, landmarks, drones, and seagulls"
         ></canvas>
 
-        <div class="hud">
+        <section class="terminal-section walkman-panel playdeck-panel">
+          <div class="terminal-heading">
+            <h2>Walkman Deck</h2>
+            <p class="radar-copy" id="walkman-count">SONG DEX 0/0</p>
+          </div>
+          <div class="walkman-shell">
+            <div class="walkman-knob" aria-hidden="true"></div>
+            <div class="walkman-console">
+              <div class="walkman-display">
+                <p class="walkman-display-label">PIRATE WALKMAN // SONG DEX</p>
+                <div class="walkman-display-window" aria-live="polite">
+                  <div class="walkman-eq" id="walkman-eq" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <p class="walkman-display-status" id="audio-status">DECK: IDLE</p>
+                  <p class="walkman-display-track" id="now-playing">TRACK: SONG DEX STANDBY</p>
+                </div>
+              </div>
+
+              <div class="walkman-controls" aria-label="Walkman controls">
+                <button id="walkman-pause" class="walkman-control" type="button" aria-label="Pause tape">II</button>
+                <button id="audio-stop" class="walkman-control" type="button" aria-label="Stop tape">■</button>
+                <button id="walkman-prev" class="walkman-control" type="button" aria-label="Previous tape">◀◀</button>
+                <button id="walkman-play" class="walkman-control walkman-control-play" type="button" aria-label="Play loaded tape">▶</button>
+                <button id="walkman-next" class="walkman-control" type="button" aria-label="Next tape">▶▶</button>
+              </div>
+            </div>
+          </div>
+
+          <p class="walkman-copy" id="walkman-copy">Collect songs on foot. Every pickup adds a playable tape to your Song Dex.</p>
+          <ul id="walkman-list" aria-label="Collected songs"></ul>
+        </section>
+
+        <div class="hud location-hud">
           <p id="coords">POS 00.0, 00.0</p>
           <p id="sector">SECTOR: BAY LOOP</p>
           <p id="signal">SIGNAL: ROAMING STATIC</p>
           <p id="landmark">LANDMARK: SCANNING</p>
         </div>
 
-        <div class="audio-bar">
-          <p id="now-playing">NOW PLAYING: (none)</p>
-          <p id="audio-status">AUDIO STATUS: idle</p>
-        </div>
-
-        <div class="touch-controls" aria-label="Mobile movement controls">
-          <div class="touch-pad">
-            <span class="touch-spacer" aria-hidden="true"></span>
-            <button data-key="arrowup" type="button">UP</button>
-            <span class="touch-spacer" aria-hidden="true"></span>
-            <button data-key="arrowleft" type="button">LEFT</button>
-            <div class="touch-center" aria-hidden="true">DRAG ON MAP</div>
-            <button data-key="arrowright" type="button">RIGHT</button>
-            <span class="touch-spacer" aria-hidden="true"></span>
-            <button data-key="arrowdown" type="button">DOWN</button>
-            <span class="touch-spacer" aria-hidden="true"></span>
-          </div>
+        <div class="touch-controls" aria-label="Mobile quick actions">
           <div class="touch-actions">
             <button id="touch-audio-stop" type="button">Stop</button>
             <button id="touch-burst" type="button">Burst</button>
             <button id="touch-clear-track" type="button">Clear Track</button>
           </div>
-          <p class="touch-help-copy">Hold the pad or drag anywhere on the world screen to steer. Tap Burst to fire on mobile.</p>
         </div>
       </section>
 
@@ -133,37 +160,6 @@
             <p class="radar-copy">TAP TO TRACK</p>
           </div>
           <ul id="channel-list"></ul>
-        </section>
-
-        <section class="terminal-section walkman-panel">
-          <div class="terminal-heading">
-            <h2>Walkman Deck</h2>
-            <p class="radar-copy" id="walkman-count">SONG DEX 0/0</p>
-          </div>
-          <div class="walkman-shell">
-            <div class="walkman-knob" aria-hidden="true"></div>
-            <div class="walkman-console">
-              <div class="walkman-display">
-                <p class="walkman-display-label">PIRATE WALKMAN // SONG DEX</p>
-                <div class="walkman-display-window" aria-live="polite">
-                  <div class="walkman-led-bars" aria-hidden="true"></div>
-                  <p class="walkman-display-status" id="walkman-display-status">CACHE EMPTY</p>
-                  <p class="walkman-display-track" id="walkman-display-track">COLLECT SONG PICKUPS TO BUILD YOUR DECK</p>
-                </div>
-              </div>
-
-              <div class="walkman-controls" aria-label="Walkman controls">
-                <button id="walkman-pause" class="walkman-control" type="button" aria-label="Pause tape">II</button>
-                <button id="audio-stop" class="walkman-control" type="button" aria-label="Stop tape">■</button>
-                <button id="walkman-prev" class="walkman-control" type="button" aria-label="Previous tape">◀◀</button>
-                <button id="walkman-play" class="walkman-control walkman-control-play" type="button" aria-label="Play loaded tape">▶</button>
-                <button id="walkman-next" class="walkman-control" type="button" aria-label="Next tape">▶▶</button>
-              </div>
-            </div>
-          </div>
-
-          <p class="walkman-copy" id="walkman-copy">Collect songs on foot. Every pickup adds a playable tape to your Song Dex.</p>
-          <ul id="walkman-list" aria-label="Collected songs"></ul>
         </section>
 
         <section class="terminal-section">

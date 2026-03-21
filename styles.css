@@ -276,6 +276,8 @@ body.world-started .attract-screen {
   max-width: 44rem;
   width: 100%;
   justify-self: center;
+  display: grid;
+  gap: 0;
 }
 
 #game {
@@ -297,9 +299,7 @@ body.world-started .attract-screen {
     inset 0 0 0 2px rgba(255, 229, 109, 0.28);
 }
 
-.hud,
-.audio-bar {
-  margin-top: 0.65rem;
+.hud {
   border: 2px solid rgba(53, 214, 255, 0.55);
   background: rgba(8, 27, 48, 0.9);
   display: flex;
@@ -314,13 +314,8 @@ body.world-started .attract-screen {
   font-size: clamp(1.02rem, 3vw, 1.28rem);
 }
 
-.hud p,
-.audio-bar p {
+.hud p {
   margin: 0;
-}
-
-.audio-bar {
-  flex-wrap: wrap;
 }
 
 #touch-audio-stop,
@@ -357,12 +352,12 @@ body.world-started .attract-screen {
 }
 
 #now-playing {
-  font-size: clamp(1rem, 2.4vw, 1.2rem);
+  font-size: 0.5rem;
 }
 
 #audio-status {
-  font-size: clamp(0.95rem, 2.3vw, 1.08rem);
-  color: #fff1b1;
+  font-size: 0.54rem;
+  color: #ffd1d6;
 }
 
 #landmark {
@@ -375,44 +370,27 @@ body.world-started .attract-screen {
   gap: 0.55rem;
 }
 
-.touch-pad {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.45rem;
+.playdeck-panel {
+  margin-top: 0;
+  border-top: 0;
 }
 
-.touch-pad button,
+.game-panel > .walkman-panel {
+  width: 100%;
+}
+
+.game-panel > .location-hud {
+  margin-top: 0.65rem;
+}
+
 .touch-actions button {
   min-height: 3.15rem;
-}
-
-.touch-spacer {
-  min-height: 3.15rem;
-}
-
-.touch-center {
-  border: 2px dashed rgba(53, 214, 255, 0.36);
-  background: rgba(6, 14, 32, 0.78);
-  color: #8be8ff;
-  font-family: var(--font-heading);
-  font-size: 0.48rem;
-  line-height: 1.6;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  padding: 0.4rem;
 }
 
 .touch-actions {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.45rem;
-}
-
-.touch-help-copy {
-  margin: 0;
-  color: #ffc6e3;
-  font-size: clamp(0.98rem, 2.4vw, 1.06rem);
 }
 
 .terminal {
@@ -597,18 +575,84 @@ body.world-started .attract-screen {
     repeating-linear-gradient(180deg, rgba(255, 130, 149, 0.03) 0 2px, transparent 2px 4px);
 }
 
-.walkman-led-bars {
+.walkman-eq {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0.18rem;
+  align-items: end;
   height: 2.1rem;
   margin-bottom: 0.46rem;
-  border: 1px solid rgba(255, 116, 140, 0.16);
-  background:
-    linear-gradient(180deg, transparent 0 44%, rgba(34, 0, 10, 0.82) 44% 56%, transparent 56% 100%),
-    repeating-linear-gradient(90deg, rgba(255, 122, 140, 0.94) 0 5px, rgba(255, 201, 209, 0.94) 5px 6px, transparent 6px 10px) left 10px top 8px / calc(100% - 24px) 10px no-repeat,
-    repeating-linear-gradient(90deg, rgba(255, 122, 140, 0.94) 0 5px, rgba(255, 201, 209, 0.94) 5px 6px, transparent 6px 10px) left 18px bottom 8px / calc(100% - 36px) 10px no-repeat,
-    linear-gradient(180deg, rgba(60, 6, 16, 0.82), rgba(18, 1, 6, 0.95));
-  box-shadow:
-    inset 0 0 18px rgba(255, 83, 112, 0.24),
-    0 0 18px rgba(255, 96, 128, 0.06);
+}
+
+.walkman-eq span {
+  display: block;
+  min-height: 18%;
+  border-radius: 1px;
+  background: linear-gradient(180deg, #ffd3d8, #ff7b92);
+  box-shadow: 0 0 9px rgba(255, 97, 124, 0.24);
+  transform-origin: center bottom;
+  transform: scaleY(0.28);
+  opacity: 0.26;
+}
+
+.walkman-display-window[data-audio-state="loaded"] .walkman-eq span,
+.walkman-display-window[data-audio-state="paused"] .walkman-eq span {
+  transform: scaleY(0.48);
+  opacity: 0.45;
+}
+
+.walkman-display-window[data-audio-state="playing"] .walkman-eq span,
+.walkman-display-window[data-audio-state="loading"] .walkman-eq span {
+  opacity: 0.95;
+  animation: walkmanEqPulse 820ms ease-in-out infinite;
+}
+
+.walkman-eq span:nth-child(1) {
+  animation-delay: -0.28s;
+}
+
+.walkman-eq span:nth-child(2) {
+  animation-delay: -0.48s;
+}
+
+.walkman-eq span:nth-child(3) {
+  animation-delay: -0.16s;
+}
+
+.walkman-eq span:nth-child(4) {
+  animation-delay: -0.64s;
+}
+
+.walkman-eq span:nth-child(5) {
+  animation-delay: -0.22s;
+}
+
+.walkman-eq span:nth-child(6) {
+  animation-delay: -0.54s;
+}
+
+.walkman-eq span:nth-child(7) {
+  animation-delay: -0.34s;
+}
+
+.walkman-eq span:nth-child(8) {
+  animation-delay: -0.72s;
+}
+
+.walkman-eq span:nth-child(9) {
+  animation-delay: -0.26s;
+}
+
+.walkman-eq span:nth-child(10) {
+  animation-delay: -0.58s;
+}
+
+.walkman-eq span:nth-child(11) {
+  animation-delay: -0.18s;
+}
+
+.walkman-eq span:nth-child(12) {
+  animation-delay: -0.44s;
 }
 
 .walkman-display-status,
@@ -867,6 +911,19 @@ button:focus-visible {
   }
 }
 
+@keyframes walkmanEqPulse {
+  0%,
+  100% {
+    transform: scaleY(0.24);
+  }
+  35% {
+    transform: scaleY(0.9);
+  }
+  65% {
+    transform: scaleY(0.48);
+  }
+}
+
 @media (max-width: 920px) {
   .layout {
     grid-template-columns: 1fr;
@@ -878,10 +935,6 @@ button:focus-visible {
 
   .terminal-heading {
     flex-wrap: wrap;
-  }
-
-  .audio-bar {
-    align-items: flex-start;
   }
 
   .walkman-shell {
