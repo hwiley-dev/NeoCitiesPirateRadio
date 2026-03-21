@@ -2,12 +2,42 @@
   "version": 1,
   "channels": [
     {
-      "id": "dock",
-      "name": "Dockside Solder Net",
-      "tileX": 28,
-      "tileY": 15,
-      "color": "#4dff9f",
-      "desc": "Open hardware fixes and boat-borne radio mods.",
+      "id": "space-drifter",
+      "name": "Space Drifter",
+      "tileX": 9,
+      "tileY": 4,
+      "color": "#9bf6ff",
+      "desc": "A cassette glints near the northern fog mouth above the SF ridge.",
+      "audio": {
+        "primaryUrl": "https://archive.org/download/space-drifter/Space-Drifter-44100-Dm-99bpm.mp3",
+        "fallbackUrl": "https://archive.org/download/space-drifter/Space-Drifter-44100-Dm-99bpm.mp3",
+        "license": "No reuse license listed on Internet Archive item; used here for site-owner testing.",
+        "attribution": "Hunter Wiley - Space Drifter",
+        "durationSec": 69
+      }
+    },
+    {
+      "id": "orbital-trash",
+      "name": "Orbital Trash",
+      "tileX": 4,
+      "tileY": 13,
+      "color": "#7effc5",
+      "desc": "A loose tape spins in the west-side blocks under the Sutro glow.",
+      "audio": {
+        "primaryUrl": "https://archive.org/download/orbital-trash-dm-44100-70bpm/Orbital%20trash%20-%20dm%2044100%2070bpm.mp3",
+        "fallbackUrl": "https://archive.org/download/orbital-trash-dm-44100-70bpm/Orbital%20trash%20-%20dm%2044100%2070bpm.mp3",
+        "license": "No reuse license listed on Internet Archive item; used here for site-owner testing.",
+        "attribution": "Hunter Wiley - Orbital Trash",
+        "durationSec": 196
+      }
+    },
+    {
+      "id": "great-aligning",
+      "name": "The Great Aligning",
+      "tileX": 16,
+      "tileY": 10,
+      "color": "#ffd86d",
+      "desc": "A bridge-span pickup sits in the signal choke point over the inner bay.",
       "audio": {
         "primaryUrl": "https://archive.org/download/the-great-aligning-hunter-wiley/The%20Great%20Aligning-Hunter-Wiley.mp3",
         "fallbackUrl": "https://archive.org/download/the-great-aligning-hunter-wiley/The%20Great%20Aligning-Hunter-Wiley.mp3",
@@ -17,45 +47,93 @@
       }
     },
     {
-      "id": "rooftop",
-      "name": "Rooftop Dub Relay",
-      "tileX": 22,
-      "tileY": 18,
-      "color": "#f6bd60",
-      "desc": "Bass-heavy neighborhood broadcasts and sky-antenna jams.",
-      "audio": null
-    },
-    {
-      "id": "freesoft",
-      "name": "Free Software Mast",
-      "tileX": 42,
-      "tileY": 15,
-      "color": "#83c5be",
-      "desc": "Tools, scripts, and shared code for independent stations.",
-      "audio": null
-    },
-    {
-      "id": "basement",
-      "name": "Basement Tape Loop",
-      "tileX": 24,
-      "tileY": 28,
+      "id": "mutual-delusion",
+      "name": "Mutual Delusion",
+      "tileX": 8,
+      "tileY": 17,
       "color": "#ffafcc",
-      "desc": "Tape hiss, archival edits, and spoken zines.",
-      "audio": null
+      "desc": "A redwood-side drop hums low where the peninsula starts to bend south.",
+      "audio": {
+        "primaryUrl": "https://archive.org/download/mutual-delusion/Mutual-Delusion.mp3",
+        "fallbackUrl": "https://archive.org/download/mutual-delusion/Mutual-Delusion.mp3",
+        "license": "No reuse license listed on Internet Archive item; used here for site-owner testing.",
+        "attribution": "Hunter Wiley - Mutual Delusion",
+        "durationSec": 215
+      }
     },
     {
-      "id": "street",
-      "name": "Street Mic Cipher",
-      "tileX": 46,
-      "tileY": 31,
-      "color": "#9bf6ff",
-      "desc": "Live stories, spoken word, and direct-action dispatches.",
+      "id": "ghost-culture",
+      "name": "Ghost Culture",
+      "tileX": 24,
+      "tileY": 15,
+      "color": "#ff79cb",
+      "desc": "A dockside vocal trace lingers between freight lights and port cranes.",
       "audio": {
         "primaryUrl": "https://archive.org/download/ghost-culture-hunter-wiley/Ghost-Culture_Hunter-Wiley.mp3",
         "fallbackUrl": "https://archive.org/download/ghost-culture-hunter-wiley/Ghost-Culture_Hunter-Wiley.mp3",
         "license": "No reuse license listed on Internet Archive item; used here for site-owner testing.",
         "attribution": "Hunter Wiley feat. Krystle Pyette - Ghost Culture",
         "durationSec": 265
+      }
+    },
+    {
+      "id": "exponential-crisis",
+      "name": "Exponential Crisis",
+      "tileX": 22,
+      "tileY": 12,
+      "color": "#83c5be",
+      "desc": "A bright relay puck is tucked inside the Oakland grid just off the bridge.",
+      "audio": {
+        "primaryUrl": "https://archive.org/download/exponential-crisis-fm-87-44100/Exponential_Crisis_Fm_87_44100.mp3",
+        "fallbackUrl": "https://archive.org/download/exponential-crisis-fm-87-44100/Exponential_Crisis_Fm_87_44100.mp3",
+        "license": "No reuse license listed on Internet Archive item; used here for site-owner testing.",
+        "attribution": "Hunter Wiley - Exponential Crisis",
+        "durationSec": 283
+      }
+    },
+    {
+      "id": "mindtricks",
+      "name": "Mindtricks",
+      "tileX": 24,
+      "tileY": 4,
+      "color": "#f6bd60",
+      "desc": "A head-trip cassette hides at the Berkeley edge under the hill canopy.",
+      "audio": {
+        "primaryUrl": "https://archive.org/download/08-mindtricks-dm-123-2025mastered/08-MINDTRICKS-dm-123-2025mastered.mp3",
+        "fallbackUrl": "https://archive.org/download/08-mindtricks-dm-123-2025mastered/08-MINDTRICKS-dm-123-2025mastered.mp3",
+        "license": "No reuse license listed on Internet Archive item; used here for site-owner testing.",
+        "attribution": "Hunter Wiley - Mindtricks",
+        "durationSec": 293
+      }
+    },
+    {
+      "id": "attention-economy",
+      "name": "Attention Economy",
+      "tileX": 18,
+      "tileY": 17,
+      "color": "#4dff9f",
+      "desc": "A long-play tape sits in the south-bay circuit where the route opens up.",
+      "audio": {
+        "primaryUrl": "https://archive.org/download/attention-economy/Attention-economy_44100.mp3",
+        "fallbackUrl": "https://archive.org/download/attention-economy/Attention-economy_44100.mp3",
+        "license": "No reuse license listed on Internet Archive item; used here for site-owner testing.",
+        "attribution": "Hunter Wiley - Attention Economy",
+        "durationSec": 487
+      }
+    },
+    {
+      "id": "when-starlinks-collide",
+      "name": "When the Starlinks Collide",
+      "tileX": 20,
+      "tileY": 20,
+      "color": "#cdb4db",
+      "desc": "A plaza vinyl glows near the salt-pond edge at the southeast circuit.",
+      "audio": {
+        "primaryUrl": "https://archive.org/download/when-starlinks-collide/When-Starlinks-Collide.mp3",
+        "fallbackUrl": "https://archive.org/download/when-starlinks-collide/When-Starlinks-Collide.mp3",
+        "license": "No reuse license listed on Internet Archive item; used here for site-owner testing.",
+        "attribution": "Hunter Wiley - When the Starlinks Collide",
+        "durationSec": 157
       }
     }
   ]

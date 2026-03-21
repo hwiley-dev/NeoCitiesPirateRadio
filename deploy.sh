@@ -240,7 +240,7 @@ while IFS= read -r -d '' file; do
   rel="${file#./}"
 
   case "$rel" in
-    .git/*|.DS_Store|node_modules/*|.codex/*|.neocities-deploy-manifest|deploy.sh|*.sh|*.toml)
+    .git/*|.DS_Store|node_modules/*|.codex/*|.neocities-deploy-manifest|deploy.sh|*.sh|*.toml|GC-MP3/*|tracklists/*|audio/*|scripts/*)
       continue
       ;;
   esac

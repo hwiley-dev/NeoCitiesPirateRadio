@@ -1,5 +1,9 @@
 .DS_Store
 .neocities-deploy-manifest
+.venv/
+GC-MP3/
+scripts/__pycache__/
+*.pyc
 *.swp
 *.swo
 *~

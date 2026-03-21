@@ -33,30 +33,30 @@ Then open [http://localhost:4173](http://localhost:4173).
 
 Keyboard controls:
 1. Arrow keys or `WASD` to move avatar
-2. `M` toggles audio
-3. `X` stops the current track
-4. Crossing any edge wraps you to the opposite side of the map
+2. `Space` fires a sound burst
+3. `X` stops the current tape
+4. Map edges are hard boundaries; there is no wrap-around
 
 Interaction updates:
-1. A title/attract screen now gates entry and can arm audio on start
+1. A title/attract screen gates entry into the world
 2. Clicking or tapping any signal row tracks it on the radar without teleporting the player
-3. Mobile players can use a D-pad or drag directly on the canvas to steer
-4. Live stations now drop collectible tapes that can be replayed from the Walkman Deck panel
+3. Mobile players can use a D-pad or drag directly on the canvas to steer, then tap `Burst` to fire
+4. Live stations now behave like pickups: walking onto them unlocks collectible tapes for the Walkman Deck
 
 Current site panels:
 1. Signal Dossier shows the current district, coordinates, audio state, and station credits
-2. City Radar shows the whole looping map with station markers and your current position
+2. City Radar shows the whole city map with station markers and your current position
 3. Unlocked Signals keeps quiet zones locked until you actually discover them in-world
 4. Walkman Deck stores unlocked live tapes so playback is not tied to standing on a station tile
 
 Current Bay Loop map notes:
-1. The live layout now uses a larger 64x48 peninsula/east-bay silhouette
-2. The viewport is widened to 24x18 so the world reads more like a broad overworld map
-3. The palette is now daylight-first, with stronger land-vs-water contrast and more SNES-like 16-bit map definition
+1. The live layout uses a rebuilt 32x24 block-bay silhouette with chunkier district contours and denser terrain contrast
+2. The viewport is tightened to 14x10 so camera focus is closer while still showing more of the city frame
+3. The palette now leans toward a darker cyberpunk voxel-bay look with stronger ocean, shoal, and shoreline separation
 4. `S` tiles are shallow or waterfront paths that look like water but remain walkable
 5. `~` tiles remain deep water and are blocked
 6. `H` tiles mark hills or ridgelines and are blocked
-7. The renderer adds shoreline accents, moving fog, birds, and marsh sway so the bay contour feels more alive
+7. The renderer adds shoreline accents, moving fog, seagulls, drones, marsh sway, and sound-wave bursts so the bay contour feels more alive
 8. `landmarks[]` place iconic Bay Area callouts such as the Golden Gate, Bay Bridge, Sutro Tower, Oakland port cranes, redwoods, and south-bay salt ponds
 9. Optional `aerialOverlay` lets you blend a world-scale image for finer terrain/city detail without changing tile collision logic
 10. Bridge landmarks can set `axis: "vertical"` or `axis: "horizontal"` to tune icon orientation
